@@ -235,16 +235,13 @@
     <Compile Include="Models\Pago.cs">
       <DependentUpon>ModelIB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Recarga.cs">
-      <DependentUpon>ModelIB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Servicio.cs">
       <DependentUpon>ModelIB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sesion.cs">
       <DependentUpon>ModelIB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>ModelIB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Transferencia.cs">
@@ -266,8 +263,8 @@
     <Content Include="Global.asax" />
     <Content Include="Models\ModelIB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelIB.Context.cs</LastGenOutput>
       <DependentUpon>ModelIB.edmx</DependentUpon>
+      <LastGenOutput>ModelIB.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\ModelIB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

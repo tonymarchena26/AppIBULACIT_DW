@@ -226,3 +226,5 @@ C:\Users\tonyd\source\repos\AppIBULACIT_DW\WebApiSegura\obj\Debug\WebApiSegura.c
 C:\Users\tonyd\source\repos\AppIBULACIT_DW\WebApiSegura\obj\Debug\WebApiSegura.csproj.CopyComplete
 C:\Users\tonyd\source\repos\AppIBULACIT_DW\WebApiSegura\obj\Debug\WebApiSegura.dll
 C:\Users\tonyd\source\repos\AppIBULACIT_DW\WebApiSegura\obj\Debug\WebApiSegura.pdb
+C:\Users\ClaudioPC\Desktop\Desarollo de software\WEB\ASP NET FRAMEWORK\AppIBULACIT_DW\WebApiSegura\obj\Debug\WebApiSegura.csproj.App.config
+C:\Users\ClaudioPC\Desktop\Desarollo de software\WEB\ASP NET FRAMEWORK\AppIBULACIT_DW\WebApiSegura\obj\Debug\WebApiSegura.csproj.CoreCompileInputs.cache

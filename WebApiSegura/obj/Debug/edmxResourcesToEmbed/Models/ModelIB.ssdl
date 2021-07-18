@@ -21,7 +21,7 @@
     <Property Name="FechaHora" Type="datetime" Nullable="false" />
     <Property Name="Fuente" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Numero" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Vista" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Accion" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
@@ -55,15 +55,6 @@
     <Property Name="CodigoCuenta" Type="int" Nullable="false" />
     <Property Name="CodigoMoneda" Type="int" Nullable="false" />
     <Property Name="FechaHora" Type="datetime" Nullable="false" />
-    <Property Name="Monto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Recarga">
-    <Key>
-      <PropertyRef Name="Codigo" />
-    </Key>
-    <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Propietario" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Telefono" Type="int" Nullable="false" />
     <Property Name="Monto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
   </EntityType>
   <EntityType Name="Servicio">
@@ -197,7 +188,6 @@
     <EntitySet Name="Estadistica" EntityType="Self.Estadistica" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Moneda" EntityType="Self.Moneda" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pago" EntityType="Self.Pago" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Recarga" EntityType="Self.Recarga" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Servicio" EntityType="Self.Servicio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sesion" EntityType="Self.Sesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />

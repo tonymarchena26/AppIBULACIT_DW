@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\tonyd\source\repos\AppIBULACIT_DW\WebApiSegura\Models\ModelIB.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\ClaudioPC\Desktop\Desarollo de software\WEB\ASP NET FRAMEWORK\AppIBULACIT_DW\WebApiSegura\Models\ModelIB.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -22,7 +22,5 @@ namespace WebApiSegura.Models
         public string Descripcion { get; set; }
         public string Vista { get; set; }
         public string Accion { get; set; }
-    
-        public virtual Usuario Usuario { get; set; }
     }
 }
