@@ -53,6 +53,7 @@
                   <li><a href="/Views/frmCuenta.aspx">Cuentas</a></li>
                   <li><a href="/Views/frmServicio.aspx">Servicios</a></li>
                   <li><a href="/Views/frmMoneda.aspx">Monedas</a></li>
+                    <li><a href="/Views/frmMarchamo.aspx">Marchamo</a></li>
                 </ul>
               </li>
               <li class="dropdown">
