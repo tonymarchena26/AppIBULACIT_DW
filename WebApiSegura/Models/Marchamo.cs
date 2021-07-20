@@ -12,12 +12,15 @@ namespace WebApiSegura.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class Marchamo
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int Codigo { get; set; }
+        public string Descripcion { get; set; }
+        public string Estado { get; set; }
+        public int CodigoCuenta { get; set; }
+        public int CodigoUsuario { get; set; }
+    
+        public virtual Cuenta Cuenta { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

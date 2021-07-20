@@ -190,6 +190,7 @@
     <Compile Include="Controllers\EstadisticaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MarchamoController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />
     <Compile Include="Controllers\PagoController.cs" />
     <Compile Include="Controllers\RecargaController.cs" />
@@ -212,6 +213,12 @@
       <DependentUpon>ModelIB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginRequest.cs" />
+    <Compile Include="Models\Luz.cs">
+      <DependentUpon>ModelIB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Marchamo.cs">
+      <DependentUpon>ModelIB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ModelIB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -320,6 +327,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Marchamo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

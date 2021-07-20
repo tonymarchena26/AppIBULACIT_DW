@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="INTERNET_BANKIN_ULACIT_DWModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="INTERNET_BANKIN_ULACIT_DWModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cuenta">
           <Key>
             <PropertyRef Name="Codigo" />
@@ -42,6 +42,24 @@
           <Property Name="FabricanteDispositivo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Vista" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Accion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Luz">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marchamo">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CodigoCuenta" Type="int" Nullable="false" />
+          <Property Name="CodigoUsuario" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Moneda">
           <Key>
@@ -139,6 +157,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Marchamo_Cuenta">
+          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
+          <End Role="Marchamo" Type="Self.Marchamo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Marchamo">
+              <PropertyRef Name="CodigoCuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Marchamo_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Marchamo" Type="Self.Marchamo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Marchamo">
+              <PropertyRef Name="CodigoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Pago_Cuenta">
           <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
           <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
@@ -191,6 +233,8 @@
           <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Error" EntityType="Self.Error" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estadistica" EntityType="Self.Estadistica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Luz" EntityType="Self.Luz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marchamo" EntityType="Self.Marchamo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Moneda" EntityType="Self.Moneda" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pago" EntityType="Self.Pago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Servicio" EntityType="Self.Servicio" Schema="dbo" store:Type="Tables" />
@@ -205,6 +249,14 @@
           <AssociationSet Name="FK_Cuenta_Usuario" Association="Self.FK_Cuenta_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Cuenta" EntitySet="Cuenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Marchamo_Cuenta" Association="Self.FK_Marchamo_Cuenta">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="Marchamo" EntitySet="Marchamo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Marchamo_Usuario" Association="Self.FK_Marchamo_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Marchamo" EntitySet="Marchamo" />
           </AssociationSet>
           <AssociationSet Name="FK_Pago_Cuenta" Association="Self.FK_Pago_Cuenta">
             <End Role="Cuenta" EntitySet="Cuenta" />
@@ -223,8 +275,7 @@
             <End Role="Transferencia" EntitySet="Transferencia" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="INTERNET_BANKIN_ULACIT_DWModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -243,6 +294,7 @@
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Cuenta_Usuario" FromRole="Cuenta" ToRole="Usuario" />
           <NavigationProperty Name="Pagoes" Relationship="Self.FK_Pago_Cuenta" FromRole="Cuenta" ToRole="Pago" />
           <NavigationProperty Name="Transferencias" Relationship="Self.FK_Transferencia_Cuenta" FromRole="Cuenta" ToRole="Transferencia" />
+          <NavigationProperty Name="Marchamoes" Relationship="INTERNET_BANKIN_ULACIT_DWModel.FK_Marchamo_Cuenta" FromRole="Cuenta" ToRole="Marchamo" />
         </EntityType>
         <EntityType Name="Error">
           <Key>
@@ -349,6 +401,7 @@
           <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Cuentas" Relationship="Self.FK_Cuenta_Usuario" FromRole="Usuario" ToRole="Cuenta" />
+          <NavigationProperty Name="Marchamoes" Relationship="INTERNET_BANKIN_ULACIT_DWModel.FK_Marchamo_Usuario" FromRole="Usuario" ToRole="Marchamo" />
         </EntityType>
         <Association Name="FK_Cuenta_Moneda">
           <End Role="Moneda" Type="Self.Moneda" Multiplicity="1" />
@@ -457,7 +510,61 @@
             <End Role="Servicio" EntitySet="Servicios" />
             <End Role="Pago" EntitySet="Pagoes" />
           </AssociationSet>
+          <EntitySet Name="Luzs" EntityType="INTERNET_BANKIN_ULACIT_DWModel.Luz" />
+          <EntitySet Name="Marchamoes" EntityType="INTERNET_BANKIN_ULACIT_DWModel.Marchamo" />
+          <AssociationSet Name="FK_Marchamo_Cuenta" Association="INTERNET_BANKIN_ULACIT_DWModel.FK_Marchamo_Cuenta">
+            <End Role="Cuenta" EntitySet="Cuentas" />
+            <End Role="Marchamo" EntitySet="Marchamoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Marchamo_Usuario" Association="INTERNET_BANKIN_ULACIT_DWModel.FK_Marchamo_Usuario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Marchamo" EntitySet="Marchamoes" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Luz">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Marchamo">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="CodigoCuenta" Type="Int32" Nullable="false" />
+          <Property Name="CodigoUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cuenta" Relationship="INTERNET_BANKIN_ULACIT_DWModel.FK_Marchamo_Cuenta" FromRole="Marchamo" ToRole="Cuenta" />
+          <NavigationProperty Name="Usuario" Relationship="INTERNET_BANKIN_ULACIT_DWModel.FK_Marchamo_Usuario" FromRole="Marchamo" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_Marchamo_Cuenta">
+          <End Type="INTERNET_BANKIN_ULACIT_DWModel.Cuenta" Role="Cuenta" Multiplicity="1" />
+          <End Type="INTERNET_BANKIN_ULACIT_DWModel.Marchamo" Role="Marchamo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Marchamo">
+              <PropertyRef Name="CodigoCuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Marchamo_Usuario">
+          <End Type="INTERNET_BANKIN_ULACIT_DWModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="INTERNET_BANKIN_ULACIT_DWModel.Marchamo" Role="Marchamo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Marchamo">
+              <PropertyRef Name="CodigoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -581,6 +688,26 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Luzs">
+            <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Luz">
+              <MappingFragment StoreEntitySet="Luz">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripion" ColumnName="Descripion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marchamoes">
+            <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Marchamo">
+              <MappingFragment StoreEntitySet="Marchamo">
+                <ScalarProperty Name="CodigoUsuario" ColumnName="CodigoUsuario" />
+                <ScalarProperty Name="CodigoCuenta" ColumnName="CodigoCuenta" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
