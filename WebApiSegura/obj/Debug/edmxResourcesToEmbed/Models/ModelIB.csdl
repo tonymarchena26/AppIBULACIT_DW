@@ -15,6 +15,7 @@
     <NavigationProperty Name="Usuario" Relationship="Self.FK_Cuenta_Usuario" FromRole="Cuenta" ToRole="Usuario" />
     <NavigationProperty Name="Pagoes" Relationship="Self.FK_Pago_Cuenta" FromRole="Cuenta" ToRole="Pago" />
     <NavigationProperty Name="Transferencias" Relationship="Self.FK_Transferencia_Cuenta" FromRole="Cuenta" ToRole="Transferencia" />
+    <NavigationProperty Name="Marchamoes" Relationship="INTERNET_BANKIN_ULACIT_DWModel.FK_Marchamo_Cuenta" FromRole="Cuenta" ToRole="Marchamo" />
   </EntityType>
   <EntityType Name="Error">
     <Key>
@@ -121,6 +122,7 @@
     <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Cuentas" Relationship="Self.FK_Cuenta_Usuario" FromRole="Usuario" ToRole="Cuenta" />
+    <NavigationProperty Name="Marchamoes" Relationship="INTERNET_BANKIN_ULACIT_DWModel.FK_Marchamo_Usuario" FromRole="Usuario" ToRole="Marchamo" />
   </EntityType>
   <Association Name="FK_Cuenta_Moneda">
     <End Role="Moneda" Type="Self.Moneda" Multiplicity="1" />
@@ -229,5 +231,59 @@
       <End Role="Servicio" EntitySet="Servicios" />
       <End Role="Pago" EntitySet="Pagoes" />
     </AssociationSet>
+    <EntitySet Name="Luzs" EntityType="INTERNET_BANKIN_ULACIT_DWModel.Luz" />
+    <EntitySet Name="Marchamoes" EntityType="INTERNET_BANKIN_ULACIT_DWModel.Marchamo" />
+    <AssociationSet Name="FK_Marchamo_Cuenta" Association="INTERNET_BANKIN_ULACIT_DWModel.FK_Marchamo_Cuenta">
+      <End Role="Cuenta" EntitySet="Cuentas" />
+      <End Role="Marchamo" EntitySet="Marchamoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Marchamo_Usuario" Association="INTERNET_BANKIN_ULACIT_DWModel.FK_Marchamo_Usuario">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Marchamo" EntitySet="Marchamoes" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Luz">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Marchamo">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="CodigoCuenta" Type="Int32" Nullable="false" />
+    <Property Name="CodigoUsuario" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cuenta" Relationship="INTERNET_BANKIN_ULACIT_DWModel.FK_Marchamo_Cuenta" FromRole="Marchamo" ToRole="Cuenta" />
+    <NavigationProperty Name="Usuario" Relationship="INTERNET_BANKIN_ULACIT_DWModel.FK_Marchamo_Usuario" FromRole="Marchamo" ToRole="Usuario" />
+  </EntityType>
+  <Association Name="FK_Marchamo_Cuenta">
+    <End Type="INTERNET_BANKIN_ULACIT_DWModel.Cuenta" Role="Cuenta" Multiplicity="1" />
+    <End Type="INTERNET_BANKIN_ULACIT_DWModel.Marchamo" Role="Marchamo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuenta">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Marchamo">
+        <PropertyRef Name="CodigoCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Marchamo_Usuario">
+    <End Type="INTERNET_BANKIN_ULACIT_DWModel.Usuario" Role="Usuario" Multiplicity="1" />
+    <End Type="INTERNET_BANKIN_ULACIT_DWModel.Marchamo" Role="Marchamo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Marchamo">
+        <PropertyRef Name="CodigoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

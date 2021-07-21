@@ -232,6 +232,7 @@
     <Compile Include="Controllers\CuentaManager.cs" />
     <Compile Include="Controllers\ErrorManager.cs" />
     <Compile Include="Controllers\EstadisticaManager.cs" />
+    <Compile Include="Controllers\MarchamoManager.cs" />
     <Compile Include="Controllers\MonedaManager.cs" />
     <Compile Include="Controllers\RecargaManager.cs" />
     <Compile Include="Controllers\ServicioManager.cs" />
@@ -261,6 +262,7 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Marchamo.cs" />
     <Compile Include="Models\Correo.cs" />
     <Compile Include="Models\Cuenta.cs" />
     <Compile Include="Models\Error.cs" />

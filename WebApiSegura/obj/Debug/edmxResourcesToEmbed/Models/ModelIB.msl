@@ -121,5 +121,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Luzs">
+      <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Luz">
+        <MappingFragment StoreEntitySet="Luz">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Descripion" ColumnName="Descripion" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Marchamoes">
+      <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Marchamo">
+        <MappingFragment StoreEntitySet="Marchamo">
+          <ScalarProperty Name="CodigoUsuario" ColumnName="CodigoUsuario" />
+          <ScalarProperty Name="CodigoCuenta" ColumnName="CodigoCuenta" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

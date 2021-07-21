@@ -26,7 +26,7 @@ namespace WebApiSegura.Controllers
                 {
                     SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Descripcion, Estado, CodigoCuenta, CodigoUsuario
                                                              FROM Marchamo
-                                                             WHERE Codigo = @Codigo", sqlConnection);
+                                                             WHERE CodigoUsuario = @CodigoUsuario", sqlConnection);
 
                     sqlCommand.Parameters.AddWithValue("@Codigo", id);
                     sqlConnection.Open();
