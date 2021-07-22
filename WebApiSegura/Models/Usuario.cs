@@ -17,8 +17,8 @@ namespace WebApiSegura.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
-            this.Cuentas = new HashSet<Cuenta>();
-            this.Marchamoes = new HashSet<Marchamo>();
+            this.Cuenta = new HashSet<Cuenta>();
+            this.Marchamo = new HashSet<Marchamo>();
         }
     
         public int Codigo { get; set; }
@@ -29,11 +29,12 @@ namespace WebApiSegura.Models
         public string Email { get; set; }
         public System.DateTime FechaNacimiento { get; set; }
         public string Estado { get; set; }
-        public string Token { get; set; }
 
+        public string Token { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cuenta> Cuentas { get; set; }
+        public virtual ICollection<Cuenta> Cuenta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Marchamo> Marchamoes { get; set; }
+        public virtual ICollection<Marchamo> Marchamo { get; set; }
     }
 }

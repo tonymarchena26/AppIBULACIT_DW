@@ -25,17 +25,17 @@ namespace WebApiSegura.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Cuenta> Cuentas { get; set; }
-        public virtual DbSet<Error> Errors { get; set; }
-        public virtual DbSet<Estadistica> Estadisticas { get; set; }
-        public virtual DbSet<Moneda> Monedas { get; set; }
-        public virtual DbSet<Pago> Pagoes { get; set; }
-        public virtual DbSet<Servicio> Servicios { get; set; }
-        public virtual DbSet<Sesion> Sesions { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Transferencia> Transferencias { get; set; }
-        public virtual DbSet<Usuario> Usuarios { get; set; }
-        public virtual DbSet<Luz> Luzs { get; set; }
-        public virtual DbSet<Marchamo> Marchamoes { get; set; }
+        public virtual DbSet<Cuenta> Cuenta { get; set; }
+        public virtual DbSet<Error> Error { get; set; }
+        public virtual DbSet<Estadistica> Estadistica { get; set; }
+        public virtual DbSet<Luz> Luz { get; set; }
+        public virtual DbSet<Marchamo> Marchamo { get; set; }
+        public virtual DbSet<Moneda> Moneda { get; set; }
+        public virtual DbSet<Pago> Pago { get; set; }
+        public virtual DbSet<Servicio> Servicio { get; set; }
+        public virtual DbSet<Sesion> Sesion { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Transferencia> Transferencia { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

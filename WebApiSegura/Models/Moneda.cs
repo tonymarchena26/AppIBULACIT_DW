@@ -17,8 +17,8 @@ namespace WebApiSegura.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Moneda()
         {
-            this.Cuentas = new HashSet<Cuenta>();
-            this.Pagoes = new HashSet<Pago>();
+            this.Cuenta = new HashSet<Cuenta>();
+            this.Pago = new HashSet<Pago>();
         }
     
         public int Codigo { get; set; }
@@ -26,8 +26,8 @@ namespace WebApiSegura.Models
         public string Estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cuenta> Cuentas { get; set; }
+        public virtual ICollection<Cuenta> Cuenta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pago> Pagoes { get; set; }
+        public virtual ICollection<Pago> Pago { get; set; }
     }
 }

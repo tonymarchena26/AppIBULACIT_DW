@@ -201,12 +201,12 @@
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Views\frmCuenta.aspx" />
+    <Content Include="Views\frmMarchamo.aspx" />
     <Content Include="Views\frmMoneda.aspx" />
     <Content Include="Views\frmReporteError.aspx" />
     <Content Include="Views\frmReporteEstadistica.aspx" />
     <Content Include="Views\frmReporteSesion.aspx" />
     <Content Include="Views\frmServicio.aspx" />
-    <Content Include="Views\frmMarchamo.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
@@ -311,6 +311,13 @@
     <Compile Include="Views\frmCuenta.aspx.designer.cs">
       <DependentUpon>frmCuenta.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\frmMarchamo.aspx.cs">
+      <DependentUpon>frmMarchamo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmMarchamo.aspx.designer.cs">
+      <DependentUpon>frmMarchamo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\frmMoneda.aspx.cs">
       <DependentUpon>frmMoneda.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -345,13 +352,6 @@
     </Compile>
     <Compile Include="Views\frmServicio.aspx.designer.cs">
       <DependentUpon>frmServicio.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\frmMarchamo.aspx.cs">
-      <DependentUpon>frmMarchamo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\frmMarchamo.aspx.designer.cs">
-      <DependentUpon>frmMarchamo.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -18,30 +18,31 @@ namespace WebApiSegura.Controllers
         [HttpGet]
         public IHttpActionResult GetId(int id)
         {
-            Marchamo marchamo = new Marchamo();
+            List<Marchamo> marchamos = new List<Marchamo>();
             try
             {
                 using (SqlConnection sqlConnection = new
                     SqlConnection(ConfigurationManager.ConnectionStrings["INTERNET_BANKING"].ConnectionString))
                 {
-                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Descripcion, Estado, CodigoCuenta, CodigoUsuario
+                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Descripcion, Estado, MontoMarchamo, CodigoUsuario
                                                              FROM Marchamo
                                                              WHERE CodigoUsuario = @CodigoUsuario", sqlConnection);
 
-                    sqlCommand.Parameters.AddWithValue("@Codigo", id);
+                    sqlCommand.Parameters.AddWithValue("@CodigoUsuario", id);
                     sqlConnection.Open();
 
                     SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
                     while (sqlDataReader.Read())
                     {
+                        Marchamo marchamo = new Marchamo();
                         marchamo.Codigo = sqlDataReader.GetInt32(0);
                         marchamo.Descripcion = sqlDataReader.GetString(1);
                         marchamo.Estado = sqlDataReader.GetString(2);
-                        marchamo.CodigoCuenta = sqlDataReader.GetInt32(3);
+                        marchamo.MontoMarchamo = sqlDataReader.GetInt32(3);
                         marchamo.CodigoUsuario = sqlDataReader.GetInt32(4);
+                        marchamos.Add(marchamo);
                     }
-
                     sqlConnection.Close();
                 }
             }
@@ -49,7 +50,7 @@ namespace WebApiSegura.Controllers
             {
                 return InternalServerError(ex);
             }
-            return Ok(marchamo);
+            return Ok(marchamos);
         }
 
         [HttpGet]
@@ -61,7 +62,7 @@ namespace WebApiSegura.Controllers
                 using (SqlConnection sqlConnection = new
                     SqlConnection(ConfigurationManager.ConnectionStrings["INTERNET_BANKING"].ConnectionString))
                 {
-                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Descripcion, Estado, CodigoCuenta, CodigoUsuario
+                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Descripcion, Estado, MontoMarchamo, CodigoUsuario
                                                              FROM Marchamo", sqlConnection);
 
                     sqlConnection.Open();
@@ -72,7 +73,7 @@ namespace WebApiSegura.Controllers
                         marchamo.Codigo = sqlDataReader.GetInt32(0);
                         marchamo.Descripcion = sqlDataReader.GetString(1);
                         marchamo.Estado = sqlDataReader.GetString(2);
-                        marchamo.CodigoCuenta = sqlDataReader.GetInt32(3);
+                        marchamo.MontoMarchamo = sqlDataReader.GetInt32(3);
                         marchamo.CodigoUsuario = sqlDataReader.GetInt32(4);
                         marchamos.Add(marchamo);
                     }
@@ -97,12 +98,12 @@ namespace WebApiSegura.Controllers
                 using (SqlConnection sqlConnection = new
                     SqlConnection(ConfigurationManager.ConnectionStrings["INTERNET_BANKING"].ConnectionString))
                 {
-                    SqlCommand sqlCommand = new SqlCommand(@"INSERT INTO Marchamo (Descripcion, Estado, CodigoCuenta, CodigoUsuario)
-                                                             VALUES (@Descripcion, @Estado, @CodigoCuenta, @CodigoUsuario) ", sqlConnection);
+                    SqlCommand sqlCommand = new SqlCommand(@"INSERT INTO Marchamo (Descripcion, Estado, MontoMarchamo, CodigoUsuario)
+                                                             VALUES (@Descripcion, @Estado, @MontoMarchamo, @CodigoUsuario) ", sqlConnection);
 
                     sqlCommand.Parameters.AddWithValue("@Descripcion", marchamo.Descripcion);
                     sqlCommand.Parameters.AddWithValue("@Estado", marchamo.Estado);
-                    sqlCommand.Parameters.AddWithValue("@CodigoCuenta", marchamo.CodigoCuenta);
+                    sqlCommand.Parameters.AddWithValue("@MontoMarchamo", marchamo.MontoMarchamo);
                     sqlCommand.Parameters.AddWithValue("@CodigoUsuario", marchamo.CodigoUsuario);
 
                     sqlConnection.Open();
@@ -131,13 +132,13 @@ namespace WebApiSegura.Controllers
                 using (SqlConnection sqlConnection = new
                     SqlConnection(ConfigurationManager.ConnectionStrings["INTERNET_BANKING"].ConnectionString))
                 {
-                    SqlCommand sqlCommand = new SqlCommand(@"UPDATE Marchamo SET Descripcion = @Descripcion, Estado = @Estado, CodigoCuenta = @CodigoCuenta, CodigoUsuario = @CodigoUsuario
+                    SqlCommand sqlCommand = new SqlCommand(@"UPDATE Marchamo SET Descripcion = @Descripcion, Estado = @Estado, MontoMarchamo = @MontoMarchamo, CodigoUsuario = @CodigoUsuario
                                                              WHERE Codigo = @Codigo ", sqlConnection);
 
                     sqlCommand.Parameters.AddWithValue("@Codigo", marchamo.Codigo);
                     sqlCommand.Parameters.AddWithValue("@Descripcion", marchamo.Descripcion);
                     sqlCommand.Parameters.AddWithValue("@Estado", marchamo.Estado);
-                    sqlCommand.Parameters.AddWithValue("@CodigoCuenta", marchamo.CodigoCuenta);
+                    sqlCommand.Parameters.AddWithValue("@MontoMarchamo", marchamo.MontoMarchamo);
                     sqlCommand.Parameters.AddWithValue("@CodigoUsuario", marchamo.CodigoUsuario);
 
                     sqlConnection.Open();
