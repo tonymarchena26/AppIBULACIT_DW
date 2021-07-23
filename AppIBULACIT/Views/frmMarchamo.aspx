@@ -9,6 +9,15 @@
         function CloseMantenimiento() {
             $('#myModalMantenimiento').modal('hide'); //cierra ventana de mantenimiento
         }
+
+        function openModal() {
+            $('#myModal').modal('show'); //ventana de mensajes
+        }
+
+        function CloseModal() {
+            $('#myModal').modal('hide');//cierra ventana de mensajes
+        }
+
     </script>
 
     <h1><asp:Label Text="Mantenimiento de marchamos" runat="server"></asp:Label></h1>
@@ -28,7 +37,7 @@
     <asp:LinkButton type="button" OnClick="btnNuevo_Click" CssClass="btn btn-success" ID="btnNuevo"  runat="server" Text="<span aria-hidden='true' class='glyphicon glyphicon-floppy-disk'></span> Nuevo" />
     <br />
     <asp:Label ID="lblStatus" ForeColor="Maroon" runat="server" Visible="false" />
-
+    <asp:Label ID="lblResultado" ForeColor="Maroon" Visible="False" runat="server" />
 
     <!--VENTANA DE MANTENIMIENTO -->
   <div id="myModalMantenimiento" class="modal fade" role="dialog">
@@ -52,12 +61,19 @@
                     <asp:ListItem Value="P">Pagado</asp:ListItem>
                 </asp:DropDownList></td>
               </tr>
+
+              <tr>
+                  <td><asp:Literal ID="ltrCuenta" Text="Cuenta" runat="server" Visible="false"/></td>
+                  <td> <asp:DropDownList ID="CuentaDrop"  CssClass="form-control" runat="server" Visible="false">
+                    <asp:ListItem Value="S">Seleccione cuenta</asp:ListItem>
+                </asp:DropDownList></td>
+              </tr>
               <tr>
                   <td><asp:Literal ID="ltrMontoMarchamo" Text="MontoMarchamo" runat="server" /></td>
                   <td><asp:TextBox ID="txtMontoMarchamo" runat="server" CssClass="form-control" /></td>
               </tr>
           </table>
-          <asp:Label ID="lblResultado" ForeColor="Maroon" Visible="False" runat="server" />
+          
       </div>
       <div class="modal-footer">
         <asp:LinkButton type="button" CssClass="btn btn-success" ID="btnAceptarMant" OnClick="btnAceptarMant_Click" runat="server" Text="<span aria-hidden='true' class='glyphicon glyphicon-ok'></span> Aceptar" />
@@ -67,6 +83,24 @@
   </div>
 </div>
 
+
+       <!-- VENTANA MODAL ELIMINAR -->
+  <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mantenimiento de Marchamos</h4>
+      </div>
+      <div class="modal-body">
+        <p><asp:Literal ID="ltrModalMensaje" runat="server" /><asp:Label ID="lblCodigoEliminar" runat="server" /></p>
+      </div>
+      <div class="modal-footer">
+         <asp:LinkButton type="button" CssClass="btn btn-success" ID="btnAceptarModal" OnClick="btnAceptarModal_Click"  runat="server" Text="<span aria-hidden='true' class='glyphicon glyphicon-ok'></span> Aceptar" />
+      </div>
+    </div>
+  </div>
+</div>
 
 </asp:Content>
     

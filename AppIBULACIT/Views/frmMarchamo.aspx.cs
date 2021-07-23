@@ -15,6 +15,9 @@ namespace AppIBULACIT.Views
         IEnumerable<Marchamo> marchamos = new ObservableCollection<Marchamo>();
         MarchamoManager marchamoManager = new MarchamoManager();
 
+        IEnumerable<Cuenta> cuentas = new ObservableCollection<Cuenta>();
+        CuentaManager cuentaManager = new CuentaManager();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -41,18 +44,44 @@ namespace AppIBULACIT.Views
             }
         }
 
-        protected void gvMarchamos_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected async void gvMarchamos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int index = Convert.ToInt32(e.CommandArgument);
             GridViewRow row = gvMarchamos.Rows[index];
 
             switch (e.CommandName)
             {
-                case "Modificar":
+                case "Pagar":
+
+                    CuentaDrop.Items.Clear();
+
+                    btnAceptarMant.ControlStyle.CssClass = "btn btn-primary";
+                    lblCodigo.Text = row.Cells[0].Text.Trim();
+                    txtDescripcion.Text = row.Cells[1].Text.Trim();
+                    ltrCuenta.Visible = true;
+                    ddlEstadoMant.SelectedValue = row.Cells[2].Text.Trim();
+                    txtMontoMarchamo.Text = row.Cells[3].Text.Trim();
+                    btnAceptarMant.Visible = true;
+                    ddlEstadoMant.Enabled = false;
+                    CuentaDrop.Visible = true;
+
+                    cuentas = await cuentaManager.ObtenerCuentas(Session["Token"].ToString());
+                    foreach (Cuenta c in cuentas) {
+                        if (c.CodigoUsuario.ToString() == Session["CodigoUsuario"].ToString()) {
+                            string linea = Convert.ToString(c.Codigo)+ " - " + c.Saldo;
+                            CuentaDrop.Items.Add(new ListItem(linea));
+                        }
+                    }
                     
+                    ScriptManager.RegisterStartupScript(this,
+                        this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
+
                     break;
                 case "Eliminar":
-                    
+                    lblCodigoEliminar.Text = row.Cells[0].Text;
+                    ltrModalMensaje.Text = "Esta seguro que desea eliminar el marchamo # " + lblCodigoEliminar.Text + "?";
+                    ScriptManager.RegisterStartupScript(this,
+                        this.GetType(), "LaunchServerSide", "$(function() {openModal(); } );", true);
                     break;
                 default:
                     break;
@@ -78,7 +107,6 @@ namespace AppIBULACIT.Views
             {
                 if (string.IsNullOrEmpty(lblCodigo.Text))//Insertar
                 {
-                    Console.WriteLine("insertar");
                     string cod = Session["CodigoUsuario"].ToString();
                     Marchamo marchamo = new Marchamo()
                     {
@@ -91,7 +119,7 @@ namespace AppIBULACIT.Views
                     Marchamo marchamoIngresado = await marchamoManager.Ingresar(marchamo, Session["Token"].ToString());
                     Console.WriteLine(marchamoIngresado);
 
-                    if (marchamoIngresado != null)
+                    if (marchamoIngresado.Descripcion != null)
                     {
                         lblResultado.Text = "Marchamo ingresado con exito";
                         lblResultado.Visible = true;
@@ -106,17 +134,30 @@ namespace AppIBULACIT.Views
                         lblResultado.ForeColor = Color.Maroon;
                     }
                 }
-                else //Modificar
+                else //Pagar
                 {
+                    string a = CuentaDrop.SelectedItem.Text;
+                    string[] cuentaSel = a.Split('-');
+                    Cuenta cuentaSeleccionada = await cuentaManager.ObtenerCuenta(Session["Token"].ToString(), cuentaSel[0].Trim());
+                    cuentaSeleccionada.Saldo = Convert.ToInt32(cuentaSeleccionada.Saldo) - Convert.ToInt32(txtMontoMarchamo.Text);
+
+                    Cuenta cuentaModificada = await cuentaManager.Actualizar(cuentaSeleccionada, Session["Token"].ToString());
+
+                    string cod = Session["CodigoUsuario"].ToString();
                     Marchamo marchamo = new Marchamo()
                     {
+                        Codigo = Convert.ToInt32(lblCodigo.Text),
                         Descripcion = txtDescripcion.Text,
-                        Estado = ddlEstadoMant.SelectedValue
+                        Estado = "P",
+                        MontoMarchamo = Convert.ToInt32(txtMontoMarchamo.Text),
+                        CodigoUsuario = Convert.ToInt32(cod)
                     };
+
+                    Console.WriteLine(marchamo);
 
                     Marchamo marchamoModificado = await marchamoManager.Actualizar(marchamo, Session["Token"].ToString());
 
-                    if (!string.IsNullOrEmpty(marchamoModificado.Descripcion))
+                    if (marchamoModificado.Descripcion != null)
                     {
                         lblResultado.Text = "Servicio actualizado con exito";
                         lblResultado.Visible = true;
@@ -130,6 +171,39 @@ namespace AppIBULACIT.Views
                         lblResultado.Visible = true;
                         lblResultado.ForeColor = Color.Maroon;
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorManager errorManager = new ErrorManager();
+                Error error = new Error()
+                {
+                    CodigoUsuario =
+                    Convert.ToInt32(Session["CodigoUsuario"].ToString()),
+                    FechaHora = DateTime.Now,
+                    Vista = "frmServicio.aspx",
+                    Accion = "btnAceptarModal_Click",
+                    Fuente = ex.Source,
+                    Numero = ex.HResult.ToString(),
+                    Descripcion = ex.Message
+                };
+                Error errorIngresado = await errorManager.Ingresar(error);
+            }
+        }
+
+        protected async void btnAceptarModal_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string resultado = string.Empty;
+                resultado = await marchamoManager.Eliminar(lblCodigoEliminar.Text, Session["Token"].ToString());
+                if (!string.IsNullOrEmpty(resultado))
+                {
+                    lblCodigoEliminar.Text = string.Empty;
+                    ltrModalMensaje.Text = "Servicio eliminado";
+                    btnAceptarModal.Visible = false;
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { openModal(); });", true);
+                    InicializarControles();
                 }
             }
             catch (Exception ex)

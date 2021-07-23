@@ -42,6 +42,15 @@ namespace AppIBULACIT.Views
         protected global::System.Web.UI.WebControls.Label lblStatus;
 
         /// <summary>
+        /// Control lblResultado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblResultado;
+
+        /// <summary>
         /// Control ltrTituloMantenimiento.
         /// </summary>
         /// <remarks>
@@ -87,6 +96,24 @@ namespace AppIBULACIT.Views
         protected global::System.Web.UI.WebControls.DropDownList ddlEstadoMant;
 
         /// <summary>
+        /// Control ltrCuenta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrCuenta;
+
+        /// <summary>
+        /// Control CuentaDrop.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList CuentaDrop;
+
+        /// <summary>
         /// Control ltrMontoMarchamo.
         /// </summary>
         /// <remarks>
@@ -105,15 +132,6 @@ namespace AppIBULACIT.Views
         protected global::System.Web.UI.WebControls.TextBox txtMontoMarchamo;
 
         /// <summary>
-        /// Control lblResultado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblResultado;
-
-        /// <summary>
         /// Control btnAceptarMant.
         /// </summary>
         /// <remarks>
@@ -121,5 +139,32 @@ namespace AppIBULACIT.Views
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnAceptarMant;
+
+        /// <summary>
+        /// Control ltrModalMensaje.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrModalMensaje;
+
+        /// <summary>
+        /// Control lblCodigoEliminar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCodigoEliminar;
+
+        /// <summary>
+        /// Control btnAceptarModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnAceptarModal;
     }
 }
