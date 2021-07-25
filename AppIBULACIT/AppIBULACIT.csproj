@@ -201,6 +201,7 @@
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Views\frmCuenta.aspx" />
+    <Content Include="Views\frmLuz.aspx" />
     <Content Include="Views\frmMarchamo.aspx" />
     <Content Include="Views\frmMoneda.aspx" />
     <Content Include="Views\frmReporteError.aspx" />
@@ -229,6 +230,7 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\LuzManager.cs" />
     <Compile Include="Controllers\CuentaManager.cs" />
     <Compile Include="Controllers\ErrorManager.cs" />
     <Compile Include="Controllers\EstadisticaManager.cs" />
@@ -262,6 +264,7 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Luz.cs" />
     <Compile Include="Models\Marchamo.cs" />
     <Compile Include="Models\Correo.cs" />
     <Compile Include="Models\Cuenta.cs" />
@@ -310,6 +313,13 @@
     </Compile>
     <Compile Include="Views\frmCuenta.aspx.designer.cs">
       <DependentUpon>frmCuenta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmLuz.aspx.cs">
+      <DependentUpon>frmLuz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmLuz.aspx.designer.cs">
+      <DependentUpon>frmLuz.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\frmMarchamo.aspx.cs">
       <DependentUpon>frmMarchamo.aspx</DependentUpon>

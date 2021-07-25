@@ -18,6 +18,7 @@ namespace WebApiSegura.Models
         public Usuario()
         {
             this.Cuenta = new HashSet<Cuenta>();
+            this.Luz = new HashSet<Luz>();
             this.Marchamo = new HashSet<Marchamo>();
         }
     
@@ -34,6 +35,8 @@ namespace WebApiSegura.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cuenta> Cuenta { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Luz> Luz { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Marchamo> Marchamo { get; set; }
     }

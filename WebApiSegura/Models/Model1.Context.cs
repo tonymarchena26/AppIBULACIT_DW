@@ -13,10 +13,10 @@ namespace WebApiSegura.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class INTERNET_BANKIN_ULACIT_DWEntities1 : DbContext
+    public partial class INTERNET_BANKIN_ULACIT_DWEntities : DbContext
     {
-        public INTERNET_BANKIN_ULACIT_DWEntities1()
-            : base("name=INTERNET_BANKIN_ULACIT_DWEntities1")
+        public INTERNET_BANKIN_ULACIT_DWEntities()
+            : base("name=INTERNET_BANKIN_ULACIT_DWEntities")
         {
         }
     
@@ -34,7 +34,6 @@ namespace WebApiSegura.Models
         public virtual DbSet<Pago> Pago { get; set; }
         public virtual DbSet<Servicio> Servicio { get; set; }
         public virtual DbSet<Sesion> Sesion { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Transferencia> Transferencia { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
     }

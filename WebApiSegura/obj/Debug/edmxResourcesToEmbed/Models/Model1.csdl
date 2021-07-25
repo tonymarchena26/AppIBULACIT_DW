@@ -49,6 +49,11 @@
     <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Descripion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="MontoEnergia" Type="Int32" Nullable="false" />
+    <Property Name="MontoVariable" Type="Int32" Nullable="false" />
+    <Property Name="MontoAlumbrado" Type="Int32" Nullable="false" />
+    <Property Name="CodigoUsuario" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Luz_Usuario" FromRole="Luz" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="Marchamo">
     <Key>
@@ -104,16 +109,6 @@
     <Property Name="FechaExpiracion" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <EntityType Name="Transferencia">
     <Key>
       <PropertyRef Name="Codigo" />
@@ -140,6 +135,7 @@
     <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Cuenta" Relationship="Self.FK_Cuenta_Usuario" FromRole="Usuario" ToRole="Cuenta" />
+    <NavigationProperty Name="Luz" Relationship="Self.FK_Luz_Usuario" FromRole="Usuario" ToRole="Luz" />
     <NavigationProperty Name="Marchamo" Relationship="Self.FK_Marchamo_Usuario" FromRole="Usuario" ToRole="Marchamo" />
   </EntityType>
   <Association Name="FK_Cuenta_Moneda">
@@ -190,6 +186,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Luz_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Luz" Type="Self.Luz" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Luz">
+        <PropertyRef Name="CodigoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Marchamo_Usuario">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
     <End Role="Marchamo" Type="Self.Marchamo" Multiplicity="*" />
@@ -226,7 +234,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="INTERNET_BANKIN_ULACIT_DWEntities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="INTERNET_BANKIN_ULACIT_DWEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Cuenta" EntityType="Self.Cuenta" />
     <EntitySet Name="Error" EntityType="Self.Error" />
     <EntitySet Name="Estadistica" EntityType="Self.Estadistica" />
@@ -236,7 +244,6 @@
     <EntitySet Name="Pago" EntityType="Self.Pago" />
     <EntitySet Name="Servicio" EntityType="Self.Servicio" />
     <EntitySet Name="Sesion" EntityType="Self.Sesion" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <EntitySet Name="Transferencia" EntityType="Self.Transferencia" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />
     <AssociationSet Name="FK_Cuenta_Moneda" Association="Self.FK_Cuenta_Moneda">
@@ -254,6 +261,10 @@
     <AssociationSet Name="FK_Transferencia_Cuenta" Association="Self.FK_Transferencia_Cuenta">
       <End Role="Cuenta" EntitySet="Cuenta" />
       <End Role="Transferencia" EntitySet="Transferencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Luz_Usuario" Association="Self.FK_Luz_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Luz" EntitySet="Luz" />
     </AssociationSet>
     <AssociationSet Name="FK_Marchamo_Usuario" Association="Self.FK_Marchamo_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />

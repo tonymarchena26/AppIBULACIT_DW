@@ -45,6 +45,10 @@
     <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripion" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="MontoEnergia" Type="int" Nullable="false" />
+    <Property Name="MontoVariable" Type="int" Nullable="false" />
+    <Property Name="MontoAlumbrado" Type="int" Nullable="false" />
+    <Property Name="CodigoUsuario" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Marchamo">
     <Key>
@@ -93,16 +97,6 @@
     <Property Name="FechaExpiracion" Type="datetime" Nullable="false" />
     <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
   <EntityType Name="Transferencia">
     <Key>
       <PropertyRef Name="Codigo" />
@@ -148,6 +142,18 @@
         <PropertyRef Name="Codigo" />
       </Principal>
       <Dependent Role="Cuenta">
+        <PropertyRef Name="CodigoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Luz_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Luz" Type="Self.Luz" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Luz">
         <PropertyRef Name="CodigoUsuario" />
       </Dependent>
     </ReferentialConstraint>
@@ -222,7 +228,6 @@
     <EntitySet Name="Pago" EntityType="Self.Pago" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Servicio" EntityType="Self.Servicio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sesion" EntityType="Self.Sesion" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Transferencia" EntityType="Self.Transferencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Cuenta_Moneda" Association="Self.FK_Cuenta_Moneda">
@@ -232,6 +237,10 @@
     <AssociationSet Name="FK_Cuenta_Usuario" Association="Self.FK_Cuenta_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Cuenta" EntitySet="Cuenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Luz_Usuario" Association="Self.FK_Luz_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Luz" EntitySet="Luz" />
     </AssociationSet>
     <AssociationSet Name="FK_Marchamo_Usuario" Association="Self.FK_Marchamo_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />

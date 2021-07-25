@@ -190,6 +190,7 @@
     <Compile Include="Controllers\EstadisticaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LuzController.cs" />
     <Compile Include="Controllers\MarchamoController.cs" />
     <Compile Include="Controllers\MonedaController.cs" />
     <Compile Include="Controllers\PagoController.cs" />
@@ -244,9 +245,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sesion.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Transferencia.cs">
