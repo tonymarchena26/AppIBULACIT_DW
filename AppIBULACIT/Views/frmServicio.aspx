@@ -27,7 +27,7 @@
                 });
             });
         });
-        </script> 
+ </script> 
 
     <h1><asp:Label Text="Mantenimiento de servicios" runat="server"></asp:Label></h1>
     <input id="myInput" Placeholder="Buscar" class="form-control" type="text" />

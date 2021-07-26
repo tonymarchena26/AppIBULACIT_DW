@@ -38,6 +38,24 @@
     <Property Name="Vista" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Accion" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="Luz">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Marchamo">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="CodigoCuenta" Type="int" Nullable="false" />
+    <Property Name="CodigoUsuario" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Moneda">
     <Key>
       <PropertyRef Name="Codigo" />
@@ -134,6 +152,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Marchamo_Cuenta">
+    <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
+    <End Role="Marchamo" Type="Self.Marchamo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cuenta">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Marchamo">
+        <PropertyRef Name="CodigoCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Marchamo_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Marchamo" Type="Self.Marchamo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Marchamo">
+        <PropertyRef Name="CodigoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Pago_Cuenta">
     <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
     <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
@@ -186,6 +228,8 @@
     <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Error" EntityType="Self.Error" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Estadistica" EntityType="Self.Estadistica" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Luz" EntityType="Self.Luz" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Marchamo" EntityType="Self.Marchamo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Moneda" EntityType="Self.Moneda" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pago" EntityType="Self.Pago" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Servicio" EntityType="Self.Servicio" Schema="dbo" store:Type="Tables" />
@@ -200,6 +244,14 @@
     <AssociationSet Name="FK_Cuenta_Usuario" Association="Self.FK_Cuenta_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Cuenta" EntitySet="Cuenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Marchamo_Cuenta" Association="Self.FK_Marchamo_Cuenta">
+      <End Role="Cuenta" EntitySet="Cuenta" />
+      <End Role="Marchamo" EntitySet="Marchamo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Marchamo_Usuario" Association="Self.FK_Marchamo_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Marchamo" EntitySet="Marchamo" />
     </AssociationSet>
     <AssociationSet Name="FK_Pago_Cuenta" Association="Self.FK_Pago_Cuenta">
       <End Role="Cuenta" EntitySet="Cuenta" />

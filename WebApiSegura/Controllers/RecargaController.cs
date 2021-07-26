@@ -14,7 +14,7 @@ namespace WebApiSegura.Controllers
     [RoutePrefix("api/Recarga")]
     public class RecargaController : ApiController
     {
-        [HttpGet]
+        /*[HttpGet]
         public IHttpActionResult GetId(int id)
         {
             Recarga recarga = new Recarga();
@@ -180,6 +180,6 @@ namespace WebApiSegura.Controllers
             }
 
             return Ok(id);
-        }
+        }*/
     }
 }
