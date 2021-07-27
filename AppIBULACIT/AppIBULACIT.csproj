@@ -230,6 +230,7 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\InfraccionesController.cs" />
     <Compile Include="Controllers\LuzManager.cs" />
     <Compile Include="Controllers\CuentaManager.cs" />
     <Compile Include="Controllers\ErrorManager.cs" />
@@ -264,6 +265,7 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Infracciones.cs" />
     <Compile Include="Models\Luz.cs" />
     <Compile Include="Models\Marchamo.cs" />
     <Compile Include="Models\Correo.cs" />
@@ -273,6 +275,7 @@
     <Compile Include="Models\LoginRequest.cs" />
     <Compile Include="Models\Moneda.cs" />
     <Compile Include="Models\Pago.cs" />
+    <Compile Include="Models\PruebaManejo.cs" />
     <Compile Include="Models\Recarga.cs" />
     <Compile Include="Models\Servicio.cs" />
     <Compile Include="Models\Sesion.cs" />
@@ -366,6 +369,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Infracciones\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
