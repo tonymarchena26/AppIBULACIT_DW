@@ -12,15 +12,12 @@ namespace WebApiSegura.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Estadistica
+    public partial class sysdiagram
     {
-        public int Codigo { get; set; }
-        public int CodigoUsuario { get; set; }
-        public System.DateTime FechaHora { get; set; }
-        public string Navegador { get; set; }
-        public string PlataformaDispositivo { get; set; }
-        public string FabricanteDispositivo { get; set; }
-        public string Vista { get; set; }
-        public string Accion { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

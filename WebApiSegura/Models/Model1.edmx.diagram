@@ -4,26 +4,39 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="61f2bcc66b864ed99a38b0bd77bae8a7" Name="Diagram1">
-        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Cuenta" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Error" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Estadistica" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Luz" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Marchamo" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Moneda" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Pago" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Servicio" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Sesion" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Transferencia" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Usuario" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+      <Diagram DiagramId="24a1b3a6492e4129b7dadaad8b24438b" Name="Diagram1">
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.CableInternet" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Cuenta" Width="1.5" PointX="6" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Error" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Estadistica" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Infraccione" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Luz" Width="1.5" PointX="3" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Marchamo" Width="1.5" PointX="3" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.MatriculaColegio" Width="1.5" PointX="3" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Moneda" Width="1.5" PointX="3.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Pago" Width="1.5" PointX="8.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.PruebasManejo" Width="1.5" PointX="3" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Recarga" Width="1.5" PointX="3" PointY="27.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Servicio" Width="1.5" PointX="6" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Sesion" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.sysdiagram" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Tarjeta" Width="1.5" PointX="3" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Transferencia" Width="1.5" PointX="8.25" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="INTERNET_BANKIN_ULACIT_DWModel.Usuario" Width="1.5" PointX="0.75" PointY="15.25" IsExpanded="true" />
+        <AssociationConnector Association="INTERNET_BANKIN_ULACIT_DWModel.FK_CableInternet_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="INTERNET_BANKIN_ULACIT_DWModel.FK_Cuenta_Moneda" ManuallyRouted="false" />
         <AssociationConnector Association="INTERNET_BANKIN_ULACIT_DWModel.FK_Cuenta_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="INTERNET_BANKIN_ULACIT_DWModel.FK_Pago_Cuenta" ManuallyRouted="false" />
         <AssociationConnector Association="INTERNET_BANKIN_ULACIT_DWModel.FK_Transferencia_Cuenta" ManuallyRouted="false" />
+        <AssociationConnector Association="INTERNET_BANKIN_ULACIT_DWModel.FK__Infraccio__Codig__18EBB532" ManuallyRouted="false" />
         <AssociationConnector Association="INTERNET_BANKIN_ULACIT_DWModel.FK_Luz_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="INTERNET_BANKIN_ULACIT_DWModel.FK_Marchamo_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="INTERNET_BANKIN_ULACIT_DWModel.FK_MatriculaColegio_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="INTERNET_BANKIN_ULACIT_DWModel.FK_Pago_Moneda" ManuallyRouted="false" />
         <AssociationConnector Association="INTERNET_BANKIN_ULACIT_DWModel.FK_Pago_Servicio" ManuallyRouted="false" />
+        <AssociationConnector Association="INTERNET_BANKIN_ULACIT_DWModel.FK__PruebasMa__Codig__160F4887" ManuallyRouted="false" />
+        <AssociationConnector Association="INTERNET_BANKIN_ULACIT_DWModel.FK_Recarga_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="INTERNET_BANKIN_ULACIT_DWModel.FK_Tarjeta_Usuario" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
