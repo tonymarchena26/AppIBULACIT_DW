@@ -322,4 +322,3 @@ D:\Cosas de U\DWProyectoFinal\Final\AppIBULACIT_DW\WebApiSegura\obj\Debug\WebApi
 D:\Cosas de U\DWProyectoFinal\Final\AppIBULACIT_DW\WebApiSegura\obj\Debug\WebApiSegura.csproj.CopyComplete
 D:\Cosas de U\DWProyectoFinal\Final\AppIBULACIT_DW\WebApiSegura\obj\Debug\WebApiSegura.dll
 D:\Cosas de U\DWProyectoFinal\Final\AppIBULACIT_DW\WebApiSegura\obj\Debug\WebApiSegura.pdb
-D:\Cosas de U\DWProyectoFinal\Final\AppIBULACIT_DW\WebApiSegura\obj\Debug\WebApiSegura.csproj.AssemblyReference.cache
