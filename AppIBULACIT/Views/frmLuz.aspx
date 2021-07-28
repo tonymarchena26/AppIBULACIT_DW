@@ -77,14 +77,17 @@
               <tr>
                   <td><asp:Literal ID="ltrMontoEnergia" Text="Monto Energia" runat="server" /></td>
                   <td><asp:TextBox ID="txtMontoEnergia" runat="server" CssClass="form-control" /></td>
+                  <td><asp:RegularExpressionValidator ID="revMontoEnergia" runat="server" ControlToValidate="txtMontoEnergia" ErrorMessage="Ingrese solo numeros" ValidationExpression="\d+"></asp:RegularExpressionValidator></td>
               </tr>
               <tr>
                   <td><asp:Literal ID="ltrMontoVariable" Text="Monto Variable" runat="server" /></td>
                   <td><asp:TextBox ID="txtMontoVariable" runat="server" CssClass="form-control" /></td>
+                  <td><asp:RegularExpressionValidator ID="revMontoVariable" runat="server" ControlToValidate="txtMontoVariable" ErrorMessage="Ingrese solo numeros" ValidationExpression="\d+"></asp:RegularExpressionValidator></td>
               </tr>
               <tr>
                   <td><asp:Literal ID="ltrMontoAlumbrado" Text="Monto Alumbrado" runat="server" /></td>
                   <td><asp:TextBox ID="txtMontoAlumbrado" runat="server" CssClass="form-control" /></td>
+                  <td><asp:RegularExpressionValidator ID="revMontoAlumbrado" runat="server" ControlToValidate="txtMontoAlumbrado" ErrorMessage="Ingrese solo numeros" ValidationExpression="\d+"></asp:RegularExpressionValidator></td>
               </tr>
               <tr>
                   <td><asp:Literal ID="ltrMontoTotal" Text="Monto Total" runat="server" Visible="false"/></td>
