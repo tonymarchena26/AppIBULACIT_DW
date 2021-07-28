@@ -132,6 +132,15 @@ namespace AppIBULACIT.Views
         protected global::System.Web.UI.WebControls.TextBox txtMontoEnergia;
 
         /// <summary>
+        /// Control revMontoEnergia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revMontoEnergia;
+
+        /// <summary>
         /// Control ltrMontoVariable.
         /// </summary>
         /// <remarks>
@@ -150,6 +159,15 @@ namespace AppIBULACIT.Views
         protected global::System.Web.UI.WebControls.TextBox txtMontoVariable;
 
         /// <summary>
+        /// Control revMontoVariable.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revMontoVariable;
+
+        /// <summary>
         /// Control ltrMontoAlumbrado.
         /// </summary>
         /// <remarks>
@@ -166,6 +184,15 @@ namespace AppIBULACIT.Views
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMontoAlumbrado;
+
+        /// <summary>
+        /// Control revMontoAlumbrado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revMontoAlumbrado;
 
         /// <summary>
         /// Control ltrMontoTotal.
