@@ -69,8 +69,9 @@
                 </asp:DropDownList></td>
               </tr>
               <tr>
-                  <td><asp:Literal ID="ltrMontoMarchamo" Text="MontoMarchamo" runat="server" /></td>
+                  <td><asp:Literal ID="ltrMontoMarchamo" Text="Monto Marchamo" runat="server" /></td>
                   <td><asp:TextBox ID="txtMontoMarchamo" runat="server" CssClass="form-control" /></td>
+                  <td><asp:RegularExpressionValidator ID="revMontoMarchamo" runat="server" ControlToValidate="txtMontoMarchamo" ErrorMessage="Ingrese solo numeros" ValidationExpression="\d+"></asp:RegularExpressionValidator></td>
               </tr>
           </table>
           
