@@ -36,6 +36,8 @@ namespace WebApiSegura.Models
         public string Email { get; set; }
         public System.DateTime FechaNacimiento { get; set; }
         public string Estado { get; set; }
+
+        public string Token { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CableInternet> CableInternets { get; set; }

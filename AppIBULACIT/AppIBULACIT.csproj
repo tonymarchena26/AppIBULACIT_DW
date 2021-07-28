@@ -230,7 +230,6 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\InfraccionesController.cs" />
     <Compile Include="Controllers\LuzManager.cs" />
     <Compile Include="Controllers\CuentaManager.cs" />
     <Compile Include="Controllers\ErrorManager.cs" />
