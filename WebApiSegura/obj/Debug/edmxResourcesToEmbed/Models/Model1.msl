@@ -1,7 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="INTERNET_BANKIN_ULACIT_DWModelStoreContainer" CdmEntityContainer="INTERNET_BANKIN_ULACIT_DWEntities1">
-    <EntitySetMapping Name="Cuenta">
+    <EntitySetMapping Name="CableInternets">
+      <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.CableInternet">
+        <MappingFragment StoreEntitySet="CableInternet">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Compania" ColumnName="Compania" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="CodigoUsuario" ColumnName="CodigoUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cuentas">
       <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Cuenta">
         <MappingFragment StoreEntitySet="Cuenta">
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
@@ -14,7 +26,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Error">
+    <EntitySetMapping Name="Errors">
       <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Error">
         <MappingFragment StoreEntitySet="Error">
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
@@ -28,7 +40,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Estadistica">
+    <EntitySetMapping Name="Estadisticas">
       <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Estadistica">
         <MappingFragment StoreEntitySet="Estadistica">
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
@@ -42,16 +54,32 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Luz">
-      <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Luz">
-        <MappingFragment StoreEntitySet="Luz">
+    <EntitySetMapping Name="Infracciones">
+      <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Infraccione">
+        <MappingFragment StoreEntitySet="Infracciones">
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-          <ScalarProperty Name="Descripion" ColumnName="Descripion" />
-          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+          <ScalarProperty Name="TipoInfraccion" ColumnName="TipoInfraccion" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="CodigoUsuario" ColumnName="CodigoUsuario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Marchamo">
+    <EntitySetMapping Name="Luzs">
+      <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Luz">
+        <MappingFragment StoreEntitySet="Luz">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="CodigoUsuario" ColumnName="CodigoUsuario" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="MontoEnergia" ColumnName="MontoEnergia" />
+          <ScalarProperty Name="MontoVariable" ColumnName="MontoVariable" />
+          <ScalarProperty Name="MontoAlumbrado" ColumnName="MontoAlumbrado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Marchamoes">
       <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Marchamo">
         <MappingFragment StoreEntitySet="Marchamo">
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
@@ -62,7 +90,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Moneda">
+    <EntitySetMapping Name="MatriculaColegios">
+      <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.MatriculaColegio">
+        <MappingFragment StoreEntitySet="MatriculaColegio">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Estudiante" ColumnName="Estudiante" />
+          <ScalarProperty Name="Colegio" ColumnName="Colegio" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="CodigoUsuario" ColumnName="CodigoUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Monedas">
       <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Moneda">
         <MappingFragment StoreEntitySet="Moneda">
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
@@ -71,7 +110,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Pago">
+    <EntitySetMapping Name="Pagoes">
       <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Pago">
         <MappingFragment StoreEntitySet="Pago">
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
@@ -83,7 +122,29 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Servicio">
+    <EntitySetMapping Name="PruebasManejoes">
+      <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.PruebasManejo">
+        <MappingFragment StoreEntitySet="PruebasManejo">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="DerechoMatricula" ColumnName="DerechoMatricula" />
+          <ScalarProperty Name="CodigoUsuario" ColumnName="CodigoUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recargas">
+      <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Recarga">
+        <MappingFragment StoreEntitySet="Recarga">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Propietario" ColumnName="Propietario" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="CodigoUsuario" ColumnName="CodigoUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Servicios">
       <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Servicio">
         <MappingFragment StoreEntitySet="Servicio">
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
@@ -92,7 +153,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Sesion">
+    <EntitySetMapping Name="Sesions">
       <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Sesion">
         <MappingFragment StoreEntitySet="Sesion">
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
@@ -104,7 +165,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.sysdiagrams">
+      <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.sysdiagram">
         <MappingFragment StoreEntitySet="sysdiagrams">
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -114,7 +175,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Transferencia">
+    <EntitySetMapping Name="Tarjetas">
+      <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Tarjeta">
+        <MappingFragment StoreEntitySet="Tarjeta">
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="CodigoUsuario" ColumnName="CodigoUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transferencias">
       <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Transferencia">
         <MappingFragment StoreEntitySet="Transferencia">
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
@@ -127,7 +199,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Usuario">
+    <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="INTERNET_BANKIN_ULACIT_DWModel.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />

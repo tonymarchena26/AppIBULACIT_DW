@@ -11,17 +11,17 @@ namespace AppIBULACIT.Views
 {
 
 
-    public partial class frmMarchamo
+    public partial class frmLuz
     {
 
         /// <summary>
-        /// Control gvMarchamos.
+        /// Control gvLuzFacturas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvMarchamos;
+        protected global::System.Web.UI.WebControls.GridView gvLuzFacturas;
 
         /// <summary>
         /// Control btnNuevo.
@@ -114,31 +114,103 @@ namespace AppIBULACIT.Views
         protected global::System.Web.UI.WebControls.DropDownList CuentaDrop;
 
         /// <summary>
-        /// Control ltrMontoMarchamo.
+        /// Control ltrMontoEnergia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrMontoMarchamo;
+        protected global::System.Web.UI.WebControls.Literal ltrMontoEnergia;
 
         /// <summary>
-        /// Control txtMontoMarchamo.
+        /// Control txtMontoEnergia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMontoMarchamo;
+        protected global::System.Web.UI.WebControls.TextBox txtMontoEnergia;
 
         /// <summary>
-        /// Control revMontoMarchamo.
+        /// Control revMontoEnergia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator revMontoMarchamo;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revMontoEnergia;
+
+        /// <summary>
+        /// Control ltrMontoVariable.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrMontoVariable;
+
+        /// <summary>
+        /// Control txtMontoVariable.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMontoVariable;
+
+        /// <summary>
+        /// Control revMontoVariable.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revMontoVariable;
+
+        /// <summary>
+        /// Control ltrMontoAlumbrado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrMontoAlumbrado;
+
+        /// <summary>
+        /// Control txtMontoAlumbrado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMontoAlumbrado;
+
+        /// <summary>
+        /// Control revMontoAlumbrado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revMontoAlumbrado;
+
+        /// <summary>
+        /// Control ltrMontoTotal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrMontoTotal;
+
+        /// <summary>
+        /// Control txtMontoTotal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMontoTotal;
 
         /// <summary>
         /// Control btnAceptarMant.

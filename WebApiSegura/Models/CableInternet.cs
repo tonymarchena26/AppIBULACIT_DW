@@ -12,15 +12,15 @@ namespace WebApiSegura.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Estadistica
+    public partial class CableInternet
     {
         public int Codigo { get; set; }
+        public string ID { get; set; }
+        public string Compania { get; set; }
+        public string Nombre { get; set; }
+        public decimal Monto { get; set; }
         public int CodigoUsuario { get; set; }
-        public System.DateTime FechaHora { get; set; }
-        public string Navegador { get; set; }
-        public string PlataformaDispositivo { get; set; }
-        public string FabricanteDispositivo { get; set; }
-        public string Vista { get; set; }
-        public string Accion { get; set; }
+    
+        public virtual Usuario Usuario { get; set; }
     }
 }

@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="INTERNET_BANKIN_ULACIT_DWModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CableInternet">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Compania" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="Monto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CodigoUsuario" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Cuenta">
     <Key>
       <PropertyRef Name="Codigo" />
@@ -38,13 +49,28 @@
     <Property Name="Vista" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Accion" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="Infracciones">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Cedula" Type="int" />
+    <Property Name="TipoInfraccion" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Monto" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CodigoUsuario" Type="int" />
+  </EntityType>
   <EntityType Name="Luz">
     <Key>
       <PropertyRef Name="Codigo" />
     </Key>
     <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Descripion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CodigoUsuario" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="MontoEnergia" Type="int" Nullable="false" />
+    <Property Name="MontoVariable" Type="int" Nullable="false" />
+    <Property Name="MontoAlumbrado" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Marchamo">
     <Key>
@@ -54,6 +80,16 @@
     <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
     <Property Name="MontoMarchamo" Type="int" Nullable="false" />
+    <Property Name="CodigoUsuario" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MatriculaColegio">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Estudiante" Type="varchar" MaxLength="80" Nullable="false" />
+    <Property Name="Colegio" Type="varchar" MaxLength="80" Nullable="false" />
+    <Property Name="Monto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="CodigoUsuario" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Moneda">
@@ -74,6 +110,26 @@
     <Property Name="CodigoMoneda" Type="int" Nullable="false" />
     <Property Name="FechaHora" Type="datetime" Nullable="false" />
     <Property Name="Monto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PruebasManejo">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" Nullable="false" />
+    <Property Name="Monto" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DerechoMatricula" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="CodigoUsuario" Type="int" />
+  </EntityType>
+  <EntityType Name="Recarga">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Propietario" Type="varchar" MaxLength="80" Nullable="false" />
+    <Property Name="Telefono" Type="int" Nullable="false" />
+    <Property Name="Monto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CodigoUsuario" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Servicio">
     <Key>
@@ -103,6 +159,16 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <EntityType Name="Tarjeta">
+    <Key>
+      <PropertyRef Name="Codigo" />
+    </Key>
+    <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cuenta" Type="varchar" MaxLength="80" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="Monto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CodigoUsuario" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Transferencia">
     <Key>
       <PropertyRef Name="Codigo" />
@@ -128,6 +194,42 @@
     <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
     <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
   </EntityType>
+  <Association Name="FK__Infraccio__Codig__18EBB532">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Infracciones" Type="Self.Infracciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Infracciones">
+        <PropertyRef Name="CodigoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PruebasMa__Codig__160F4887">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="PruebasManejo" Type="Self.PruebasManejo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="PruebasManejo">
+        <PropertyRef Name="CodigoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CableInternet_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="CableInternet" Type="Self.CableInternet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="CableInternet">
+        <PropertyRef Name="CodigoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Cuenta_Moneda">
     <End Role="Moneda" Type="Self.Moneda" Multiplicity="1" />
     <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
@@ -152,6 +254,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Luz_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Luz" Type="Self.Luz" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Luz">
+        <PropertyRef Name="CodigoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Marchamo_Usuario">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
     <End Role="Marchamo" Type="Self.Marchamo" Multiplicity="*" />
@@ -160,6 +274,18 @@
         <PropertyRef Name="Codigo" />
       </Principal>
       <Dependent Role="Marchamo">
+        <PropertyRef Name="CodigoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MatriculaColegio_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="MatriculaColegio" Type="Self.MatriculaColegio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="MatriculaColegio">
         <PropertyRef Name="CodigoUsuario" />
       </Dependent>
     </ReferentialConstraint>
@@ -200,6 +326,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Recarga_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Recarga" Type="Self.Recarga" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Recarga">
+        <PropertyRef Name="CodigoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tarjeta_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Codigo" />
+      </Principal>
+      <Dependent Role="Tarjeta">
+        <PropertyRef Name="CodigoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Transferencia_Cuenta">
     <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
     <End Role="Transferencia" Type="Self.Transferencia" Multiplicity="*" />
@@ -213,18 +363,36 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="INTERNET_BANKIN_ULACIT_DWModelStoreContainer">
+    <EntitySet Name="CableInternet" EntityType="Self.CableInternet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Error" EntityType="Self.Error" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Estadistica" EntityType="Self.Estadistica" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Infracciones" EntityType="Self.Infracciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Luz" EntityType="Self.Luz" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Marchamo" EntityType="Self.Marchamo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MatriculaColegio" EntityType="Self.MatriculaColegio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Moneda" EntityType="Self.Moneda" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pago" EntityType="Self.Pago" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PruebasManejo" EntityType="Self.PruebasManejo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Recarga" EntityType="Self.Recarga" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Servicio" EntityType="Self.Servicio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sesion" EntityType="Self.Sesion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tarjeta" EntityType="Self.Tarjeta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Transferencia" EntityType="Self.Transferencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Infraccio__Codig__18EBB532" Association="Self.FK__Infraccio__Codig__18EBB532">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Infracciones" EntitySet="Infracciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PruebasMa__Codig__160F4887" Association="Self.FK__PruebasMa__Codig__160F4887">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="PruebasManejo" EntitySet="PruebasManejo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CableInternet_Usuario" Association="Self.FK_CableInternet_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="CableInternet" EntitySet="CableInternet" />
+    </AssociationSet>
     <AssociationSet Name="FK_Cuenta_Moneda" Association="Self.FK_Cuenta_Moneda">
       <End Role="Moneda" EntitySet="Moneda" />
       <End Role="Cuenta" EntitySet="Cuenta" />
@@ -233,9 +401,17 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Cuenta" EntitySet="Cuenta" />
     </AssociationSet>
+    <AssociationSet Name="FK_Luz_Usuario" Association="Self.FK_Luz_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Luz" EntitySet="Luz" />
+    </AssociationSet>
     <AssociationSet Name="FK_Marchamo_Usuario" Association="Self.FK_Marchamo_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Marchamo" EntitySet="Marchamo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MatriculaColegio_Usuario" Association="Self.FK_MatriculaColegio_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="MatriculaColegio" EntitySet="MatriculaColegio" />
     </AssociationSet>
     <AssociationSet Name="FK_Pago_Cuenta" Association="Self.FK_Pago_Cuenta">
       <End Role="Cuenta" EntitySet="Cuenta" />
@@ -248,6 +424,14 @@
     <AssociationSet Name="FK_Pago_Servicio" Association="Self.FK_Pago_Servicio">
       <End Role="Servicio" EntitySet="Servicio" />
       <End Role="Pago" EntitySet="Pago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recarga_Usuario" Association="Self.FK_Recarga_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Recarga" EntitySet="Recarga" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tarjeta_Usuario" Association="Self.FK_Tarjeta_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Tarjeta" EntitySet="Tarjeta" />
     </AssociationSet>
     <AssociationSet Name="FK_Transferencia_Cuenta" Association="Self.FK_Transferencia_Cuenta">
       <End Role="Cuenta" EntitySet="Cuenta" />

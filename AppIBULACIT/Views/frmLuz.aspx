@@ -1,7 +1,6 @@
-﻿<%@ Page Async="true" Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmMarchamo.aspx.cs" Inherits="AppIBULACIT.Views.frmMarchamo" %>
+﻿<%@ Page Async="true" Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmLuz.aspx.cs" Inherits="AppIBULACIT.Views.frmLuz" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
- 
-    <script type="text/javascript">
+        <script type="text/javascript">
         function openModalMantenimiento() {
             $('#myModalMantenimiento').modal('show'); //ventana de mantenimiento
         }
@@ -18,18 +17,25 @@
             $('#myModal').modal('hide');//cierra ventana de mensajes
         }
 
-    </script>
+        </script>
 
-    <h1><asp:Label Text="Mantenimiento de marchamos" runat="server"></asp:Label></h1>
-    <asp:GridView ID="gvMarchamos" OnRowCommand="gvMarchamos_RowCommand" runat="server" AutoGenerateColumns="False" 
+    <h1><asp:Label Text="Mantenimiento de Pagos de Luz" runat="server"></asp:Label></h1>
+    <asp:GridView ID="gvLuzFacturas" OnRowCommand="gvLuzFacturas_RowCommand" runat="server" AutoGenerateColumns="False" 
         CssClass="table table-sm" HeaderStyle-CssClass="thead-dark" HeaderStyle-BackColor="#243054"
         HeaderStyle-ForeColor="White" AlternatingRowStyle-BackColor="LightBlue" Width="100%">
     <Columns>
         <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
+        <asp:BoundField HeaderText="CodigoUsuario" DataField="CodigoUsuario" ItemStyle-Wrap="false" ItemStyle-HorizontalAlign="Left" />
         <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" ItemStyle-Wrap="false" ItemStyle-HorizontalAlign="Left" />
         <asp:BoundField HeaderText="Estado" DataField="Estado" ItemStyle-Wrap="false" ItemStyle-HorizontalAlign="Left" />
-        <asp:BoundField HeaderText="MontoMarchamo" DataField="MontoMarchamo" ItemStyle-Wrap="false" ItemStyle-HorizontalAlign="Left" />
-        <asp:BoundField HeaderText="CodigoUsuario" DataField="CodigoUsuario" ItemStyle-Wrap="false" ItemStyle-HorizontalAlign="Left" />
+        <asp:BoundField HeaderText="Monto Energia" DataField="MontoEnergia" ItemStyle-Wrap="false" ItemStyle-HorizontalAlign="Left" />
+        <asp:BoundField HeaderText="Monto Variable" DataField="MontoVariable" ItemStyle-Wrap="false" ItemStyle-HorizontalAlign="Left" />
+        <asp:BoundField HeaderText="Monto Alumbrado" DataField="MontoAlumbrado" ItemStyle-Wrap="false" ItemStyle-HorizontalAlign="Left" />
+        <asp:TemplateField HeaderText="Monto Total" ItemStyle-Wrap="false" ItemStyle-HorizontalAlign="Left" >
+            <ItemTemplate>
+                <asp:Label ID="MontoTotal" runat="server" Text=""></asp:Label>
+            </ItemTemplate>
+        </asp:TemplateField>
         <asp:ButtonField HeaderText="Pagar" CommandName="Pagar" ControlStyle-CssClass="btn btn-primary" ButtonType="Button" Text="Pagar" />
         <asp:ButtonField HeaderText="Eliminar" CommandName="Eliminar" ControlStyle-CssClass="btn btn-danger" ButtonType="Button" Text="Eliminar" />
     </Columns>
@@ -69,9 +75,23 @@
                 </asp:DropDownList></td>
               </tr>
               <tr>
-                  <td><asp:Literal ID="ltrMontoMarchamo" Text="Monto Marchamo" runat="server" /></td>
-                  <td><asp:TextBox ID="txtMontoMarchamo" runat="server" CssClass="form-control" /></td>
-                  <td><asp:RegularExpressionValidator ID="revMontoMarchamo" runat="server" ControlToValidate="txtMontoMarchamo" ErrorMessage="Ingrese solo numeros" ValidationExpression="\d+"></asp:RegularExpressionValidator></td>
+                  <td><asp:Literal ID="ltrMontoEnergia" Text="Monto Energia" runat="server" /></td>
+                  <td><asp:TextBox ID="txtMontoEnergia" runat="server" CssClass="form-control" /></td>
+                  <td><asp:RegularExpressionValidator ID="revMontoEnergia" runat="server" ControlToValidate="txtMontoEnergia" ErrorMessage="Ingrese solo numeros" ValidationExpression="\d+"></asp:RegularExpressionValidator></td>
+              </tr>
+              <tr>
+                  <td><asp:Literal ID="ltrMontoVariable" Text="Monto Variable" runat="server" /></td>
+                  <td><asp:TextBox ID="txtMontoVariable" runat="server" CssClass="form-control" /></td>
+                  <td><asp:RegularExpressionValidator ID="revMontoVariable" runat="server" ControlToValidate="txtMontoVariable" ErrorMessage="Ingrese solo numeros" ValidationExpression="\d+"></asp:RegularExpressionValidator></td>
+              </tr>
+              <tr>
+                  <td><asp:Literal ID="ltrMontoAlumbrado" Text="Monto Alumbrado" runat="server" /></td>
+                  <td><asp:TextBox ID="txtMontoAlumbrado" runat="server" CssClass="form-control" /></td>
+                  <td><asp:RegularExpressionValidator ID="revMontoAlumbrado" runat="server" ControlToValidate="txtMontoAlumbrado" ErrorMessage="Ingrese solo numeros" ValidationExpression="\d+"></asp:RegularExpressionValidator></td>
+              </tr>
+              <tr>
+                  <td><asp:Literal ID="ltrMontoTotal" Text="Monto Total" runat="server" Visible="false"/></td>
+                  <td><asp:TextBox ID="txtMontoTotal" runat="server" CssClass="form-control" Visible="false"/></td>
               </tr>
           </table>
           
@@ -91,7 +111,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Mantenimiento de Marchamos</h4>
+        <h4 class="modal-title">Mantenimiento de Pago de Luz</h4>
       </div>
       <div class="modal-body">
         <p><asp:Literal ID="ltrModalMensaje" runat="server" /><asp:Label ID="lblCodigoEliminar" runat="server" /></p>
@@ -102,6 +122,4 @@
     </div>
   </div>
 </div>
-
 </asp:Content>
-    

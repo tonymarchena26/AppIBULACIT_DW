@@ -8,16 +8,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using AppIBULACIT.Controllers;
 using AppIBULACIT.Models;
+
 namespace AppIBULACIT.Views
 {
-    public partial class frmMarchamo : System.Web.UI.Page
+    public partial class frmLuz : System.Web.UI.Page
     {
-        IEnumerable<Marchamo> marchamos = new ObservableCollection<Marchamo>();
-        MarchamoManager marchamoManager = new MarchamoManager();
+        IEnumerable<Luz> luzFacturas = new ObservableCollection<Luz>();
+        LuzManager luzManager = new LuzManager();
 
         IEnumerable<Cuenta> cuentas = new ObservableCollection<Cuenta>();
         CuentaManager cuentaManager = new CuentaManager();
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -33,9 +33,15 @@ namespace AppIBULACIT.Views
         {
             try
             {
-                marchamos = await marchamoManager.ObtenerMarchamos(Session["Token"].ToString(), Session["CodigoUsuario"].ToString());
-                gvMarchamos.DataSource = marchamos.ToList();
-                gvMarchamos.DataBind();
+                luzFacturas = await luzManager.ObtenerLuzFacturas(Session["Token"].ToString(), Session["CodigoUsuario"].ToString());
+                gvLuzFacturas.DataSource = luzFacturas.ToList();
+                gvLuzFacturas.DataBind();
+
+                foreach (GridViewRow r in gvLuzFacturas.Rows)
+                {
+                    r.Cells[7].Text += Convert.ToInt32(r.Cells[4].Text) + Convert.ToInt32(r.Cells[5].Text) + Convert.ToInt32(r.Cells[6].Text);
+                }
+
             }
             catch (Exception ex)
             {
@@ -44,10 +50,10 @@ namespace AppIBULACIT.Views
             }
         }
 
-        protected async void gvMarchamos_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected async void gvLuzFacturas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int index = Convert.ToInt32(e.CommandArgument);
-            GridViewRow row = gvMarchamos.Rows[index];
+            GridViewRow row = gvLuzFacturas.Rows[index];
 
             switch (e.CommandName)
             {
@@ -57,73 +63,97 @@ namespace AppIBULACIT.Views
 
                     btnAceptarMant.ControlStyle.CssClass = "btn btn-primary";
                     lblCodigo.Text = row.Cells[0].Text.Trim();
-                    txtDescripcion.Text = row.Cells[1].Text.Trim();
+                    txtDescripcion.Text = row.Cells[2].Text.Trim();
                     ltrCuenta.Visible = true;
-                    ddlEstadoMant.SelectedValue = row.Cells[2].Text.Trim();
-                    txtMontoMarchamo.Text = row.Cells[3].Text.Trim();
+                    ddlEstadoMant.SelectedValue = row.Cells[3].Text.Trim();
+                    txtMontoEnergia.Text = row.Cells[4].Text.Trim();
+                    txtMontoVariable.Text = row.Cells[5].Text.Trim();
+                    txtMontoAlumbrado.Text = row.Cells[6].Text.Trim();
+                    txtMontoTotal.Text = row.Cells[7].Text.Trim();
                     btnAceptarMant.Visible = true;
                     ddlEstadoMant.Enabled = false;
                     CuentaDrop.Visible = true;
 
                     cuentas = await cuentaManager.ObtenerCuentas(Session["Token"].ToString());
-                    foreach (Cuenta c in cuentas) {
-                        if (c.CodigoUsuario.ToString() == Session["CodigoUsuario"].ToString()) {
-                            string linea = Convert.ToString(c.Codigo)+ " - " + c.Saldo;
+                    foreach (Cuenta c in cuentas)
+                    {
+                        if (c.CodigoUsuario.ToString() == Session["CodigoUsuario"].ToString())
+                        {
+                            string linea = Convert.ToString(c.Codigo) + " - " + c.Saldo;
                             CuentaDrop.Items.Add(new ListItem(linea));
                         }
                     }
-                    
+
                     ScriptManager.RegisterStartupScript(this,
                         this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
-
+                    
                     break;
                 case "Eliminar":
-                    lblCodigoEliminar.Text = row.Cells[0].Text;
                     btnAceptarModal.Visible = true;
+                    lblCodigoEliminar.Text = row.Cells[0].Text;
                     ltrModalMensaje.Text = "Esta seguro que desea eliminar el marchamo # " + lblCodigoEliminar.Text + "?";
                     ScriptManager.RegisterStartupScript(this,
                         this.GetType(), "LaunchServerSide", "$(function() {openModal(); } );", true);
+                    
                     break;
                 default:
                     break;
             }
         }
 
-        protected void btnNuevo_Click(object sender, EventArgs e)
+        private bool checkEmpty()
         {
 
+            if (txtDescripcion.Text == "" || txtDescripcion.Text == null)
+            {
+                return true;
+            }
+            else
+            {
+                if (txtMontoAlumbrado.Text == "" || txtMontoAlumbrado.Text == null)
+                {
+                    return true;
+                }
+                else 
+                {
+                    if (txtMontoEnergia.Text == "" || txtMontoEnergia.Text == null)
+                    {
+                        return true;
+                    }
+                    else 
+                    {
+                        if (txtMontoVariable.Text == "" || txtMontoVariable.Text == null)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        protected void btnNuevo_Click(object sender, EventArgs e)
+        {
             lblCodigo.Text = "";
             txtDescripcion.Text = "";
             ltrCuenta.Visible = false;
             CuentaDrop.Visible = false;
             ddlEstadoMant.SelectedValue = default;
-            txtMontoMarchamo.Text = "";
-            ddlEstadoMant.Enabled = false;
+            txtMontoEnergia.Text = "";
+            txtMontoVariable.Text = "";
+            txtMontoAlumbrado.Text = "";
+            txtMontoTotal.Text = "";
 
-            ltrTituloMantenimiento.Text = "Nuevo marchamo";
+            ltrTituloMantenimiento.Text = "Nuevo Pago de Luz";
             btnAceptarMant.ControlStyle.CssClass = "btn btn-sucess";
             btnAceptarMant.Visible = true;
             txtDescripcion.Visible = true;
             ltrDescripcion.Visible = true;
             ddlEstadoMant.Enabled = false;
+            txtDescripcion.Text = string.Empty;
             ScriptManager.RegisterStartupScript(this,
                 this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
-        }
-
-        private bool checkEmpty() {
-
-            if (txtMontoMarchamo.Text == "" || txtMontoMarchamo.Text == null)
-            {
-                return true;
-            }
-            else {
-                if (txtDescripcion.Text == "" || txtDescripcion.Text == null)
-                {
-                    return true;
-                }
-            } 
-
-            return false;
         }
 
         protected async void btnAceptarMant_Click(object sender, EventArgs e)
@@ -132,73 +162,27 @@ namespace AppIBULACIT.Views
             {
                 if (string.IsNullOrEmpty(lblCodigo.Text))//Insertar
                 {
+
                     bool vacios = checkEmpty();
                     if (vacios == false)
                     {
                         string cod = Session["CodigoUsuario"].ToString();
-                        Marchamo marchamo = new Marchamo()
+                        Luz luzFactura = new Luz()
                         {
+                            CodigoUsuario = Convert.ToInt32(cod),
                             Descripcion = txtDescripcion.Text,
                             Estado = ddlEstadoMant.SelectedValue,
-                            CodigoUsuario = Convert.ToInt32(cod),
-                            MontoMarchamo = Convert.ToInt32(txtMontoMarchamo.Text)
+                            MontoEnergia = Convert.ToInt32(txtMontoEnergia.Text),
+                            MontoVariable = Convert.ToInt32(txtMontoVariable.Text),
+                            MontoAlumbrado = Convert.ToInt32(txtMontoAlumbrado.Text)
                         };
 
-                        Marchamo marchamoIngresado = await marchamoManager.Ingresar(marchamo, Session["Token"].ToString());
-                        Console.WriteLine(marchamoIngresado);
+                        Luz luzFacturaIngreada = await luzManager.Ingresar(luzFactura, Session["Token"].ToString());
+                        Console.WriteLine(luzFacturaIngreada);
 
-                        if (marchamoIngresado.Descripcion != null)
+                        if (luzFacturaIngreada.Descripcion != null)
                         {
-                            lblResultado.Text = "Marchamo ingresado con exito";
-                            lblResultado.Visible = true;
-                            lblResultado.ForeColor = Color.Green;
-                            btnAceptarMant.Visible = false;
-                            InicializarControles();
-                        }
-                        else
-                        {
-                            lblResultado.Text = "Hubo un error al efectuar la operacion.";
-                            lblResultado.Visible = true;
-                            lblResultado.ForeColor = Color.Maroon;
-                        }
-                    }
-                    else {
-                        lblResultado.Text = "Revise que no haya campos vacios";
-                        lblResultado.Visible = true;
-                        lblResultado.ForeColor = Color.Orange;
-                        btnAceptarMant.Visible = false;
-                        InicializarControles();
-                    }
-
-                }
-                else //Pagar
-                {
-                    if (ddlEstadoMant.SelectedValue == "N")
-                    {
-                        string a = CuentaDrop.SelectedItem.Text;
-                        string[] cuentaSel = a.Split('-');
-                        Cuenta cuentaSeleccionada = await cuentaManager.ObtenerCuenta(Session["Token"].ToString(), cuentaSel[0].Trim());
-                        cuentaSeleccionada.Saldo = Convert.ToInt32(cuentaSeleccionada.Saldo) - Convert.ToInt32(txtMontoMarchamo.Text);
-
-                        Cuenta cuentaModificada = await cuentaManager.Actualizar(cuentaSeleccionada, Session["Token"].ToString());
-
-                        string cod = Session["CodigoUsuario"].ToString();
-                        Marchamo marchamo = new Marchamo()
-                        {
-                            Codigo = Convert.ToInt32(lblCodigo.Text),
-                            Descripcion = txtDescripcion.Text,
-                            Estado = "P",
-                            MontoMarchamo = Convert.ToInt32(txtMontoMarchamo.Text),
-                            CodigoUsuario = Convert.ToInt32(cod)
-                        };
-
-                        Console.WriteLine(marchamo);
-
-                        Marchamo marchamoModificado = await marchamoManager.Actualizar(marchamo, Session["Token"].ToString());
-
-                        if (marchamoModificado.Descripcion != null)
-                        {
-                            lblResultado.Text = "Marchamo actualizado con exito";
+                            lblResultado.Text = "Factura de Luz ingresada con exito";
                             lblResultado.Visible = true;
                             lblResultado.ForeColor = Color.Green;
                             btnAceptarMant.Visible = false;
@@ -213,7 +197,55 @@ namespace AppIBULACIT.Views
                     }
                     else 
                     {
-                        lblResultado.Text = "El marchamo ya se ha pagado";
+                        lblResultado.Text = "Revise que no haya campos vacios";
+                        lblResultado.Visible = true;
+                        lblResultado.ForeColor = Color.Orange;
+                        btnAceptarMant.Visible = false;
+                        InicializarControles();
+                    }
+                }
+                else //Pagar
+                {
+                    if (ddlEstadoMant.SelectedValue == "N")
+                    {
+                        string a = CuentaDrop.SelectedItem.Text;
+                        string[] cuentaSel = a.Split('-');
+                        Cuenta cuentaSeleccionada = await cuentaManager.ObtenerCuenta(Session["Token"].ToString(), cuentaSel[0].Trim());
+                        cuentaSeleccionada.Saldo = Convert.ToInt32(cuentaSeleccionada.Saldo) - Convert.ToInt32(txtMontoTotal.Text);
+
+                        Cuenta cuentaModificada = await cuentaManager.Actualizar(cuentaSeleccionada, Session["Token"].ToString());
+
+                        string cod = Session["CodigoUsuario"].ToString();
+                        Luz luzFactura = new Luz()
+                        {
+                            Codigo = Convert.ToInt32(lblCodigo.Text),
+                            CodigoUsuario = Convert.ToInt32(cod),
+                            Descripcion = txtDescripcion.Text,
+                            Estado = "P",
+                            MontoEnergia = Convert.ToInt32(txtMontoEnergia.Text),
+                            MontoVariable = Convert.ToInt32(txtMontoVariable.Text),
+                            MontoAlumbrado = Convert.ToInt32(txtMontoAlumbrado.Text)
+                        };
+
+                        Luz luzFacturaModificada = await luzManager.Actualizar(luzFactura, Session["Token"].ToString());
+
+                        if (luzFacturaModificada.Descripcion != null)
+                        {
+                            lblResultado.Text = "Factura de Luz actualizada con exito";
+                            lblResultado.Visible = true;
+                            lblResultado.ForeColor = Color.Green;
+                            btnAceptarMant.Visible = false;
+                            InicializarControles();
+                        }
+                        else
+                        {
+                            lblResultado.Text = "Hubo un error al efectuar la operacion.";
+                            lblResultado.Visible = true;
+                            lblResultado.ForeColor = Color.Maroon;
+                        }
+                    }
+                    else {
+                        lblResultado.Text = "Factura de Luz ya fue pagada";
                         lblResultado.Visible = true;
                         lblResultado.ForeColor = Color.Blue;
                         btnAceptarMant.Visible = false;
@@ -229,7 +261,7 @@ namespace AppIBULACIT.Views
                     CodigoUsuario =
                     Convert.ToInt32(Session["CodigoUsuario"].ToString()),
                     FechaHora = DateTime.Now,
-                    Vista = "frmServicio.aspx",
+                    Vista = "frmLuz.aspx",
                     Accion = "btnAceptarModal_Click",
                     Fuente = ex.Source,
                     Numero = ex.HResult.ToString(),
@@ -244,12 +276,17 @@ namespace AppIBULACIT.Views
             try
             {
                 string resultado = string.Empty;
-                resultado = await marchamoManager.Eliminar(lblCodigoEliminar.Text, Session["Token"].ToString());
+                resultado = await luzManager.Eliminar(lblCodigoEliminar.Text, Session["Token"].ToString());
                 if (!string.IsNullOrEmpty(resultado))
                 {
                     lblCodigoEliminar.Text = string.Empty;
-                    ltrModalMensaje.Text = "Marchamo eliminado";
+                    ltrModalMensaje.Text = "Factura de Luz eliminada";
                     btnAceptarModal.Visible = false;
+
+                    lblResultado.Text = "Factura de Luz fue eliminada";
+                    lblResultado.ForeColor = Color.Green;
+                    InicializarControles();
+
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { openModal(); });", true);
                     InicializarControles();
                 }
@@ -262,7 +299,7 @@ namespace AppIBULACIT.Views
                     CodigoUsuario =
                     Convert.ToInt32(Session["CodigoUsuario"].ToString()),
                     FechaHora = DateTime.Now,
-                    Vista = "frmMarchamo.aspx",
+                    Vista = "frmLuz.aspx",
                     Accion = "btnAceptarModal_Click",
                     Fuente = ex.Source,
                     Numero = ex.HResult.ToString(),
@@ -271,5 +308,6 @@ namespace AppIBULACIT.Views
                 Error errorIngresado = await errorManager.Ingresar(error);
             }
         }
+
     }
 }

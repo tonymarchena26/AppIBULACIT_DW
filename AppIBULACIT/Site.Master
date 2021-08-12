@@ -16,6 +16,10 @@
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.0/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
 </head>
 <body>
     <form runat="server">
@@ -54,6 +58,7 @@
                   <li><a href="/Views/frmServicio.aspx">Servicios</a></li>
                   <li><a href="/Views/frmMoneda.aspx">Monedas</a></li>
                   <li><a href="/Views/frmMarchamo.aspx">Marchamo</a></li>
+                  <li><a href="/Views/frmLuz.aspx">Pagos de Luz</a></li>
                 </ul>
               </li>
               <li class="dropdown">
