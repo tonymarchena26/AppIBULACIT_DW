@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -18,14 +19,20 @@ namespace AppIBULACIT.Views
         IEnumerable<Cuenta> cuentas = new ObservableCollection<Cuenta>();
         CuentaManager cuentaManager = new CuentaManager();
 
-        protected void Page_Load(object sender, EventArgs e)
+        public string labelsGraficoVistasGlobal = string.Empty;
+        public string dataGraficoVistasGlobal = string.Empty;
+        public string backgroundcolorsGraficoVistasGlobal = string.Empty;
+
+        protected async void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 if (Session["CodigoUsuario"] == null)
                     Response.Redirect("~/Login.aspx");
                 else
+                    marchamos = await marchamoManager.ObtenerMarchamos(Session["Token"].ToString(), Session["CodigoUsuario"].ToString());
                     InicializarControles();
+                    ObtenerDatosGrafico();
             }
         }
 
@@ -36,6 +43,7 @@ namespace AppIBULACIT.Views
                 marchamos = await marchamoManager.ObtenerMarchamos(Session["Token"].ToString(), Session["CodigoUsuario"].ToString());
                 gvMarchamos.DataSource = marchamos.ToList();
                 gvMarchamos.DataBind();
+                ObtenerDatosGrafico();
             }
             catch (Exception ex)
             {
@@ -270,6 +278,34 @@ namespace AppIBULACIT.Views
                 };
                 Error errorIngresado = await errorManager.Ingresar(error);
             }
+        }
+
+        private void ObtenerDatosGrafico()
+        {
+            StringBuilder script = new StringBuilder();
+            StringBuilder labelsGraficoVistas = new StringBuilder();
+            StringBuilder dataGraficoVistas = new StringBuilder();
+            StringBuilder backgroundcolorsGraficoVistas = new StringBuilder();
+
+            var random = new Random();
+
+
+            foreach (var marchamo in marchamos.GroupBy(info => info.MontoMarchamo).Select(group => new { Codigo = group.Key, Cantidad = group.Key }).OrderBy(x => x.Codigo))
+            {
+                string color = String.Format("#{0:X6}", random.Next(0x1000000));
+                labelsGraficoVistas.Append(string.Format("'{0}',", marchamo.Codigo)); // 'Correo', 'frmError'.
+                //dataGraficoVistas.Append(string.Format("'{0}',", marchamo.Cantidad)); // '2', '3'.
+                dataGraficoVistas.Append(string.Format("'{0}',", marchamo.Cantidad)); // '2', '3'.
+
+
+                backgroundcolorsGraficoVistas.Append(string.Format("'{0}',", color));
+
+                labelsGraficoVistasGlobal = labelsGraficoVistas.ToString().Substring(0, labelsGraficoVistas.Length - 1);
+                dataGraficoVistasGlobal = dataGraficoVistas.ToString().Substring(0, dataGraficoVistas.Length - 1);
+                backgroundcolorsGraficoVistasGlobal = backgroundcolorsGraficoVistas.ToString().Substring(0, backgroundcolorsGraficoVistas.Length - 1);
+            }
+
+
         }
     }
 }

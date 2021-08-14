@@ -29,7 +29,7 @@ namespace AppIBULACIT.Views
                     Response.Redirect("~/Login.aspx");
                 else
                     errores = await errorManager.ObtenerErrores(Session["Token"].ToString());
-                InicializarControles();
+                    InicializarControles();
                     ObtenerDatosGrafico();
             }
         }

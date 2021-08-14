@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -18,7 +19,11 @@ namespace AppIBULACIT.Views
 
         IEnumerable<Cuenta> cuentas = new ObservableCollection<Cuenta>();
         CuentaManager cuentaManager = new CuentaManager();
-        protected void Page_Load(object sender, EventArgs e)
+
+        public string labelsGraficoVistasGlobal = string.Empty;
+        public string dataGraficoVistasGlobal = string.Empty;
+        public string backgroundcolorsGraficoVistasGlobal = string.Empty;
+        protected async void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
@@ -26,6 +31,8 @@ namespace AppIBULACIT.Views
                     Response.Redirect("~/Login.aspx");
                 else
                     InicializarControles();
+                    luzFacturas = await luzManager.ObtenerLuzFacturas(Session["Token"].ToString(), Session["CodigoUsuario"].ToString());
+                    ObtenerDatosGrafico();
             }
         }
 
@@ -36,6 +43,7 @@ namespace AppIBULACIT.Views
                 luzFacturas = await luzManager.ObtenerLuzFacturas(Session["Token"].ToString(), Session["CodigoUsuario"].ToString());
                 gvLuzFacturas.DataSource = luzFacturas.ToList();
                 gvLuzFacturas.DataBind();
+                ObtenerDatosGrafico();
 
                 foreach (GridViewRow r in gvLuzFacturas.Rows)
                 {
@@ -85,7 +93,7 @@ namespace AppIBULACIT.Views
                     }
 
                     ScriptManager.RegisterStartupScript(this,
-                        this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
+                        this.GetType(), "LaunchServerSide", "openModalMantenimiento();", true);
                     
                     break;
                 case "Eliminar":
@@ -93,7 +101,7 @@ namespace AppIBULACIT.Views
                     lblCodigoEliminar.Text = row.Cells[0].Text;
                     ltrModalMensaje.Text = "Esta seguro que desea eliminar el marchamo # " + lblCodigoEliminar.Text + "?";
                     ScriptManager.RegisterStartupScript(this,
-                        this.GetType(), "LaunchServerSide", "$(function() {openModal(); } );", true);
+                        this.GetType(), "LaunchServerSide", "openModal();", true);
                     
                     break;
                 default:
@@ -143,7 +151,6 @@ namespace AppIBULACIT.Views
             txtMontoEnergia.Text = "";
             txtMontoVariable.Text = "";
             txtMontoAlumbrado.Text = "";
-            txtMontoTotal.Text = "";
 
             ltrTituloMantenimiento.Text = "Nuevo Pago de Luz";
             btnAceptarMant.ControlStyle.CssClass = "btn btn-sucess";
@@ -153,7 +160,7 @@ namespace AppIBULACIT.Views
             ddlEstadoMant.Enabled = false;
             txtDescripcion.Text = string.Empty;
             ScriptManager.RegisterStartupScript(this,
-                this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
+                this.GetType(), "LaunchServerSide", "openModalMantenimiento();", true);
         }
 
         protected async void btnAceptarMant_Click(object sender, EventArgs e)
@@ -287,7 +294,7 @@ namespace AppIBULACIT.Views
                     lblResultado.ForeColor = Color.Green;
                     InicializarControles();
 
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { openModal(); });", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "openModal();", true);
                     InicializarControles();
                 }
             }
@@ -307,6 +314,33 @@ namespace AppIBULACIT.Views
                 };
                 Error errorIngresado = await errorManager.Ingresar(error);
             }
+        }
+
+        private void ObtenerDatosGrafico()
+        {
+            StringBuilder script = new StringBuilder();
+            StringBuilder labelsGraficoVistas = new StringBuilder();
+            StringBuilder dataGraficoVistas = new StringBuilder();
+            StringBuilder backgroundcolorsGraficoVistas = new StringBuilder();
+
+            var random = new Random();
+
+
+            foreach (var luz in luzFacturas.GroupBy(info => info.MontoEnergia).Select(group => new { Codigo = group.Key, Cantidad = group.Key }).OrderBy(x => x.Codigo))
+            {
+                string color = String.Format("#{0:X6}", random.Next(0x1000000));
+                labelsGraficoVistas.Append(string.Format("'{0}',", luz.Codigo)); // 'Correo', 'frmError'.
+                dataGraficoVistas.Append(string.Format("'{0}',", luz.Cantidad)); // '2', '3'.
+
+
+                backgroundcolorsGraficoVistas.Append(string.Format("'{0}',", color));
+
+                labelsGraficoVistasGlobal = labelsGraficoVistas.ToString().Substring(0, labelsGraficoVistas.Length - 1);
+                dataGraficoVistasGlobal = dataGraficoVistas.ToString().Substring(0, dataGraficoVistas.Length - 1);
+                backgroundcolorsGraficoVistasGlobal = backgroundcolorsGraficoVistas.ToString().Substring(0, backgroundcolorsGraficoVistas.Length - 1);
+            }
+
+
         }
 
     }
