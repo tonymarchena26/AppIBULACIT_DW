@@ -1,6 +1,66 @@
 ﻿<%@ Page Async="true" Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmLuz.aspx.cs" Inherits="AppIBULACIT.Views.frmLuz" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-        <script type="text/javascript">
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[id*=gvLuzFacturas]').prepend($("<thead></thead>").append($(this).find("tr:first"))).DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'copy',
+                        text: 'Copy to clipboard',
+                        className: 'exportExcel',
+                        exportOptions: {
+                            modifier: { page: 'all' },
+                            columns: [0, ':visible']
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        text: 'Export to Excel',
+                        className: 'exportExcel',
+                        columns: [0, ':visible'],
+                        filename: 'Luz_Excel',
+                        exportOptions: {
+                            modifier: { page: 'all' },
+                            columns: [0, ':visible']
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        text: 'Export to CSV',
+                        className: 'exportExcel',
+                        filename: 'Luz_Csv',
+                        exportOptions: {
+                            modifier: { page: 'all' },
+                            columns: [0, ':visible']
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        text: 'Export to PDF',
+                        className: 'exportExcel',
+                        filename: 'Luz_Pdf',
+                        orientation: 'landscape',
+                        pageSize: 'LEGAL',
+                        exportOptions: {
+                            modifier: { page: 'all' },
+                            columns: [0, ':visible']
+                        }
+                    }
+                ]
+            }); 
+        });
+    </script>
+    <script type="text/javascript">
         function openModalMantenimiento() {
             $('#myModalMantenimiento').modal('show'); //ventana de mantenimiento
         }
@@ -17,7 +77,7 @@
             $('#myModal').modal('hide');//cierra ventana de mensajes
         }
 
-        </script>
+    </script>
 
     <h1><asp:Label Text="Mantenimiento de Pagos de Luz" runat="server"></asp:Label></h1>
     <asp:GridView ID="gvLuzFacturas" OnRowCommand="gvLuzFacturas_RowCommand" runat="server" AutoGenerateColumns="False" 
@@ -122,4 +182,32 @@
     </div>
   </div>
 </div>
+
+        <div class="row">
+        <div class="col-sm">
+        <div id="canvas-holder" style="width:40%">
+		            <canvas id="vistas-chart"></canvas>
+	            </div>
+                <script >
+                    new Chart(document.getElementById("vistas-chart"), {
+                        type: 'bar',
+                        data: {
+                            labels: [<%= this.labelsGraficoVistasGlobal %>],
+                            datasets: [{
+                                label: "Facturas de Luz por monto",
+                                backgroundColor: [<%= this.backgroundcolorsGraficoVistasGlobal %>],
+                        data: [<%= this.dataGraficoVistasGlobal %>]
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                text: 'Facturas de Luz por monto'
+                            }
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+
 </asp:Content>
