@@ -42,6 +42,17 @@ namespace AppIBULACIT
                         Session["Estado"] = usuario.Estado;
                         Session["Token"] = usuario.Token;
 
+                        SesionManager sesionManager = new SesionManager();
+                        Sesion sesion = new Sesion()
+                        {
+                            CodigoUsuario = Convert.ToInt32(Session["CodigoUsuario"]),
+                            FechaInicio = DateTime.Now,
+                            FechaExpiracion = DateTime.Now,
+                            Estado = "A"
+                        };
+
+                        Sesion sesionIngresada = await sesionManager.Ingresar(sesion, Convert.ToString(Session["Token"]));
+
                         FormsAuthentication.RedirectFromLoginPage(usuario.Username, false);
                     }
                     else
