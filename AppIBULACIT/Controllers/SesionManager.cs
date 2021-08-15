@@ -25,14 +25,14 @@ namespace AppIBULACIT.Controllers
             return httpClient;
         }
 
-        public async Task<Moneda> Ingresar(Sesion sesion, string token)
+        public async Task<Sesion> Ingresar(Sesion sesion, string token)
         {
             HttpClient httpClient = GetClient(token);
 
             var response = await httpClient.PostAsync(UrlBase,
                 new StringContent(JsonConvert.SerializeObject(sesion), Encoding.UTF8, "application/json"));
 
-            return JsonConvert.DeserializeObject<Moneda>(await response.Content.ReadAsStringAsync());
+            return JsonConvert.DeserializeObject<Sesion>(await response.Content.ReadAsStringAsync());
         }
 
         public async Task<IEnumerable<Sesion>> ObtenerSesiones(string token)
