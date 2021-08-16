@@ -1,6 +1,6 @@
 ﻿<%@ Page Async="true" Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmReporteSesion.aspx.cs" Inherits="AppIBULACIT.Views.frmReporteSesion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-     <h1><asp:Label Text="Bitacora de errores" runat="server"></asp:Label></h1>
+     <h1><asp:Label Text="Bitacora de Sesion" runat="server"></asp:Label></h1>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />

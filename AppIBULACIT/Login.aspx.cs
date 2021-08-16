@@ -50,8 +50,20 @@ namespace AppIBULACIT
                             FechaExpiracion = DateTime.Now,
                             Estado = "A"
                         };
-
                         Sesion sesionIngresada = await sesionManager.Ingresar(sesion, Convert.ToString(Session["Token"]));
+
+                        EstadisticaManager estadisticaManager = new EstadisticaManager();
+                        Estadistica estadistica = new Estadistica()
+                        {
+                            CodigoUsuario = Convert.ToInt32(Session["CodigoUsuario"]),
+                            FechaHora = DateTime.Now,
+                            Navegador = HttpContext.Current.Request.Browser.Browser,
+                            PlataformaDispositivo = Environment.OSVersion.ToString(),
+                            FabricanteDispositivo = "-",
+                            Vista = "Login.aspx",
+                            Accion = "btnAceptar_Click"                            
+                        };
+                        Estadistica estadisticaIngresada = await estadisticaManager.Ingresar(estadistica, Convert.ToString(Session["Token"]));
 
                         FormsAuthentication.RedirectFromLoginPage(usuario.Username, false);
                     }
