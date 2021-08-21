@@ -25,14 +25,14 @@ namespace AppIBULACIT.Controllers
             return httpClient;
         }
 
-        public async Task<Moneda> Ingresar(Sesion estdistica, string token)
+        public async Task<Estadistica> Ingresar(Estadistica estadistica, string token)
         {
             HttpClient httpClient = GetClient(token);
 
             var response = await httpClient.PostAsync(UrlBase,
-                new StringContent(JsonConvert.SerializeObject(estdistica), Encoding.UTF8, "application/json"));
+                new StringContent(JsonConvert.SerializeObject(estadistica), Encoding.UTF8, "application/json"));
 
-            return JsonConvert.DeserializeObject<Moneda>(await response.Content.ReadAsStringAsync());
+            return JsonConvert.DeserializeObject<Estadistica>(await response.Content.ReadAsStringAsync());
         }
 
         public async Task<IEnumerable<Estadistica>> ObtenerEstadisticas(string token)
